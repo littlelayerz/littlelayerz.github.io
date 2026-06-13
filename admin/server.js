@@ -77,6 +77,7 @@ async function generateStaticPages(products) {
   <!-- Open Graph / WhatsApp / Social Previews -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://littlelayerz.github.io/products/${product.id}/">
+  <link rel="icon" type="image/png" href="../../favicon.png">
   <meta property="og:title" content="${product.name} | Little Layerz">
   <meta property="og:description" content="${product.description.replace(/"/g, '&quot;')}">
   <meta property="og:image" content="${ogImage}">

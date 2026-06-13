@@ -30,6 +30,7 @@ async function run() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Little Layerz | Premium Custom Products</title>
+  <link rel="icon" type="image/png" href="../../favicon.png">
   
   <meta property="og:title" content="${product.name} - Little Layerz">
   <meta property="og:description" content="${product.description}">
