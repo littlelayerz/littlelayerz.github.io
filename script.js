@@ -73,24 +73,40 @@ function renderCatalog(products, container) {
     };
     
     const waLink = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(product.whatsappMessage)}`;
-    const hasMultipleImages = product.images.length > 1;
+    const hasImages = product.images && product.images.length > 0;
+    const hasMultipleImages = hasImages && product.images.length > 1;
     
     const card = document.createElement('div');
     card.className = 'product-card';
     card.id = product.id;
     
-    let carouselHtml = `
-      <div class="card-image-container">
-        <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
-        ${hasMultipleImages ? `
-          <button class="carousel-btn carousel-prev" onclick="changeImage(event, '${product.id}', -1)" aria-label="Previous image">❮</button>
-          <button class="carousel-btn carousel-next" onclick="changeImage(event, '${product.id}', 1)" aria-label="Next image">❯</button>
-          <div class="carousel-dots" id="dots-${product.id}">
-            ${product.images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}
-          </div>
-        ` : ''}
-      </div>
-    `;
+    let carouselHtml = '';
+    if (hasImages) {
+      carouselHtml = `
+        <div class="card-image-container">
+          <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
+          ${hasMultipleImages ? `
+            <button class="carousel-btn carousel-prev" onclick="changeImage(event, '${product.id}', -1)" aria-label="Previous image">❮</button>
+            <button class="carousel-btn carousel-next" onclick="changeImage(event, '${product.id}', 1)" aria-label="Next image">❯</button>
+            <div class="carousel-dots" id="dots-${product.id}">
+              ${product.images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    } else if (product.instagramLink) {
+      carouselHtml = `
+        <div class="card-image-container" style="display: flex; align-items: center; justify-content: center; background: #fff; overflow-y: auto;">
+          <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0; padding:0; width:100%;"></blockquote>
+        </div>
+      `;
+    } else {
+      carouselHtml = `
+        <div class="card-image-container">
+          <img src="https://via.placeholder.com/400x400?text=No+Image" alt="${product.name}" class="card-image">
+        </div>
+      `;
+    }
 
     card.innerHTML = `
       ${carouselHtml}
@@ -116,6 +132,13 @@ function renderCatalog(products, container) {
     
     container.appendChild(card);
   });
+  
+  // Re-process instagram embeds for the catalog
+  setTimeout(() => {
+    if (window.instgrm && window.instgrm.Embeds) {
+      window.instgrm.Embeds.process();
+    }
+  }, 100);
 }
 
 function renderSingleProduct(product, container) {
@@ -130,20 +153,36 @@ function renderSingleProduct(product, container) {
   };
   
   const waLink = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(product.whatsappMessage || `Hi, I would like to order: ${product.name} (${formatPrice(product.price)})`)}`;
-  const hasMultipleImages = product.images.length > 1;
+  const hasImages = product.images && product.images.length > 0;
+  const hasMultipleImages = hasImages && product.images.length > 1;
   
-  let carouselHtml = `
-    <div class="card-image-container single-view-image">
-      <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
-      ${hasMultipleImages ? `
-        <button class="carousel-btn carousel-prev" onclick="changeImage(event, '${product.id}', -1)" aria-label="Previous image">❮</button>
-        <button class="carousel-btn carousel-next" onclick="changeImage(event, '${product.id}', 1)" aria-label="Next image">❯</button>
-        <div class="carousel-dots" id="dots-${product.id}">
-          ${product.images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}
-        </div>
-      ` : ''}
-    </div>
-  `;
+  let carouselHtml = '';
+  if (hasImages) {
+    carouselHtml = `
+      <div class="card-image-container single-view-image">
+        <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
+        ${hasMultipleImages ? `
+          <button class="carousel-btn carousel-prev" onclick="changeImage(event, '${product.id}', -1)" aria-label="Previous image">❮</button>
+          <button class="carousel-btn carousel-next" onclick="changeImage(event, '${product.id}', 1)" aria-label="Next image">❯</button>
+          <div class="carousel-dots" id="dots-${product.id}">
+            ${product.images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  } else if (product.instagramLink) {
+    carouselHtml = `
+      <div class="card-image-container single-view-image" style="display: flex; align-items: center; justify-content: center; background: #fff; overflow-y: auto;">
+        <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0; padding:0; width:100%;"></blockquote>
+      </div>
+    `;
+  } else {
+    carouselHtml = `
+      <div class="card-image-container single-view-image">
+        <img src="https://via.placeholder.com/400x400?text=No+Image" alt="${product.name}" class="card-image">
+      </div>
+    `;
+  }
 
   container.innerHTML = `
     <div class="back-nav">
@@ -168,7 +207,7 @@ function renderSingleProduct(product, container) {
         </div>
       </div>
     </div>
-    ${product.instagramLink ? `
+    ${product.instagramLink && hasImages ? `
       <div style="margin-top: 4rem; text-align: center;">
         <h3 style="font-family: var(--font-heading); margin-bottom: 2rem; font-size: 2rem;">See it on Instagram</h3>
         <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:var(--glass-shadow); margin: 0 auto; max-width:540px; min-width:326px; padding:0; width:100%;">
