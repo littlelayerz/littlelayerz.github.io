@@ -134,6 +134,7 @@ async function generateStaticPages(products) {
     <img class="modal-content" id="modal-img">
   </div>
 
+  <script async src="//www.instagram.com/embed.js"></script>
   <script src="../../script.js"></script>
 </body>
 </html>`;
