@@ -96,8 +96,10 @@ function renderCatalog(products, container) {
       `;
     } else if (product.instagramLink) {
       carouselHtml = `
-        <div class="card-image-container" style="display: flex; align-items: center; justify-content: center; background: #fff; overflow-y: auto;">
-          <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0; padding:0; width:100%;"></blockquote>
+        <div class="card-image-container" style="background: #fafafa; overflow: hidden; display: flex; justify-content: center; align-items: flex-start;">
+          <div style="width: 100%; margin-top: -56px; pointer-events: none;">
+            <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0; padding:0; width:100%;"></blockquote>
+          </div>
         </div>
       `;
     } else {
@@ -172,8 +174,8 @@ function renderSingleProduct(product, container) {
     `;
   } else if (product.instagramLink) {
     carouselHtml = `
-      <div class="card-image-container single-view-image" style="display: flex; align-items: center; justify-content: center; background: #fff; overflow-y: auto;">
-        <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0; padding:0; width:100%;"></blockquote>
+      <div style="background: #fff; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--glass-shadow); display: flex; justify-content: center; margin-bottom: 0;">
+        <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; margin: 0; padding:0; width:100%; max-width: 540px;"></blockquote>
       </div>
     `;
   } else {
