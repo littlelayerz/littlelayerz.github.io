@@ -187,7 +187,11 @@ function renderSingleProduct(product, container) {
 }
 
 function navigateToProduct(productId) {
-  window.location.href = `/products/${productId}/`;
+  if (window.PRODUCT_SLUG) {
+    window.location.href = `../${productId}/`;
+  } else {
+    window.location.href = `products/${productId}/`;
+  }
 }
 
 // Global function to change images in carousel
@@ -218,7 +222,9 @@ window.changeImage = function(event, productId, direction) {
 // Global function to copy share link
 window.shareProduct = function(event, productId) {
   if (event) event.stopPropagation();
-  const url = `${window.location.origin}/products/${productId}/`;
+  
+  const relativePath = window.PRODUCT_SLUG ? `../${productId}/` : `products/${productId}/`;
+  const url = new URL(relativePath, window.location.href).href;
   
   navigator.clipboard.writeText(url).then(() => {
     const toast = document.getElementById('toast');
