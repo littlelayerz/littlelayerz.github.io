@@ -112,7 +112,7 @@ function renderProductList() {
         </div>
       </div>
       <div class="product-actions">
-        <a href="/preview/index.html?p=${product.id}" target="_blank" class="btn btn-sm" style="background: #10b981; text-decoration: none; text-align: center;">View</a>
+        <a href="../products/${product.id}/" target="_blank" class="btn btn-sm" style="background: #10b981; text-decoration: none; text-align: center;">View</a>
         <button class="btn btn-sm" onclick="editProduct('${product.id}')">Edit</button>
         <button class="btn btn-sm" style="background: #6b7280;" onclick="toggleActive('${product.id}')">Toggle</button>
         <button class="btn btn-sm btn-danger" onclick="deleteProduct('${product.id}')">Delete</button>
