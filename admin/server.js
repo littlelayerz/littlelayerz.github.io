@@ -16,8 +16,9 @@ const IMAGES_DIR = path.join(__dirname, '..', 'images');
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname)); // Serve admin UI files
-app.use('/images', express.static(path.join(__dirname, '..', 'images'))); // Serve images folder
-app.use('/preview', express.static(path.join(__dirname, '..'))); // Serve root folder for preview
+app.use(express.static(path.join(__dirname, '..'))); // Serve public site files
+app.use('/images', express.static(path.join(__dirname, '..', 'images'))); // Keep for backwards compatibility
+app.use('/preview', express.static(path.join(__dirname, '..'))); // Keep for backwards compatibility
 
 // Multer setup (memory storage to process with sharp before saving)
 const upload = multer({ storage: multer.memoryStorage() });
