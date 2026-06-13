@@ -30,6 +30,17 @@ window.generateWhatsAppMsg = function() {
   }
 };
 
+// Auto-format price while typing
+priceInput.addEventListener('input', (e) => {
+  let val = e.target.value.replace(/₹/g, '').trimStart();
+  if (val.length > 0) {
+    e.target.value = '₹' + val;
+  } else {
+    e.target.value = '';
+  }
+  window.generateWhatsAppMsg();
+});
+
 // Preview selected images
 imagesInput.addEventListener('change', function() {
   imagePreview.innerHTML = '';
