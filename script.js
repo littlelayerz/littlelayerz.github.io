@@ -16,12 +16,22 @@ const youtubeIcon = `<svg class="icon" viewBox="0 0 24 24"><path d="M23.498 6.18
 const productCarousels = {};
 let allProducts = [];
 
+const getAssetPath = (path) => window.PRODUCT_SLUG ? `../../${path}` : path;
+
 async function loadProducts() {
   const grid = document.getElementById('products-grid');
   try {
-    const res = await fetch('products.json');
+    const res = await fetch(getAssetPath('products.json'));
     if (!res.ok) throw new Error('Failed to fetch products');
     allProducts = await res.json();
+    
+    if (window.PRODUCT_SLUG) {
+      const product = allProducts.find(p => p.id === window.PRODUCT_SLUG && p.active);
+      if (product) {
+        renderSingleProduct(product, grid);
+        return;
+      }
+    }
     
     // Check URL parameters for single product view
     const params = new URLSearchParams(window.location.search);
@@ -71,7 +81,7 @@ function renderCatalog(products, container) {
     
     let carouselHtml = `
       <div class="card-image-container">
-        <img src="${product.images[0]}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
+        <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
         ${hasMultipleImages ? `
           <button class="carousel-btn carousel-prev" onclick="changeImage(event, '${product.id}', -1)" aria-label="Previous image">❮</button>
           <button class="carousel-btn carousel-next" onclick="changeImage(event, '${product.id}', 1)" aria-label="Next image">❯</button>
@@ -119,12 +129,12 @@ function renderSingleProduct(product, container) {
     currentIndex: 0
   };
   
-  const waLink = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(product.whatsappMessage)}`;
+  const waLink = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(product.whatsappMessage || `Hi, I would like to order: ${product.name} (${formatPrice(product.price)})`)}`;
   const hasMultipleImages = product.images.length > 1;
   
   let carouselHtml = `
     <div class="card-image-container single-view-image">
-      <img src="${product.images[0]}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
+      <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
       ${hasMultipleImages ? `
         <button class="carousel-btn carousel-prev" onclick="changeImage(event, '${product.id}', -1)" aria-label="Previous image">❮</button>
         <button class="carousel-btn carousel-next" onclick="changeImage(event, '${product.id}', 1)" aria-label="Next image">❯</button>
@@ -137,7 +147,10 @@ function renderSingleProduct(product, container) {
 
   container.innerHTML = `
     <div class="back-nav">
-      <a href="#" class="back-link" onclick="goBackToCatalog(event)">← Back to Catalog</a>
+      <a href="${window.PRODUCT_SLUG ? '../../' : './'}" class="back-link">
+        <svg class="icon" style="transform: rotate(180deg);" viewBox="0 0 24 24"><path d="M8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+        Back to Catalog
+      </a>
     </div>
     <div class="single-product-layout">
       ${carouselHtml}
@@ -147,36 +160,35 @@ function renderSingleProduct(product, container) {
         <p class="single-desc">${product.description}</p>
         <div class="card-actions single-actions">
           <a href="${waLink}" target="_blank" class="btn btn-whatsapp">${whatsappIcon} Order on WhatsApp</a>
-          <div style="display: flex; gap: 12px; width: 100%;">
-            ${product.instagramLink ? `<a href="${product.instagramLink}" target="_blank" class="btn btn-social btn-instagram" style="flex:1" aria-label="Instagram">${instagramIcon} View on Instagram</a>` : ''}
-            ${product.youtubeLink ? `<a href="${product.youtubeLink}" target="_blank" class="btn btn-social btn-youtube" style="flex:1" aria-label="YouTube">${youtubeIcon} View on YouTube</a>` : ''}
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; width: 100%;">
+            ${product.instagramLink ? `<a href="${product.instagramLink}" target="_blank" class="btn btn-instagram" style="flex:1" aria-label="Instagram">${instagramIcon} View on Instagram</a>` : ''}
+            ${product.youtubeLink ? `<a href="${product.youtubeLink}" target="_blank" class="btn btn-youtube" style="flex:1" aria-label="YouTube">${youtubeIcon} View on YouTube</a>` : ''}
           </div>
           <button class="btn btn-share" onclick="shareProduct(event, '${product.id}')">${shareIcon} Share Link</button>
         </div>
       </div>
     </div>
+    ${product.instagramLink ? `
+      <div style="margin-top: 4rem; text-align: center;">
+        <h3 style="font-family: var(--font-heading); margin-bottom: 2rem; font-size: 2rem;">See it on Instagram</h3>
+        <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:var(--glass-shadow); margin: 0 auto; max-width:540px; min-width:326px; padding:0; width:100%;">
+        </blockquote>
+      </div>
+    ` : ''}
   `;
+
+  // Re-process instagram embeds if the script is loaded
+  setTimeout(() => {
+    if (window.instgrm && window.instgrm.Embeds) {
+      window.instgrm.Embeds.process();
+    }
+  }, 100);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function navigateToProduct(productId) {
-  const newUrl = `${window.location.origin}${window.location.pathname}?p=${productId}`;
-  window.history.pushState({ path: newUrl }, '', newUrl);
-  const product = allProducts.find(p => p.id === productId);
-  if (product) {
-    renderSingleProduct(product, document.getElementById('products-grid'));
-  }
+  window.location.href = `/products/${productId}/`;
 }
-
-window.goBackToCatalog = function(e) {
-  if (e) e.preventDefault();
-  const cleanUrl = `${window.location.origin}${window.location.pathname}`;
-  window.history.pushState({ path: cleanUrl }, '', cleanUrl);
-  loadProducts();
-};
-
-// Handle history navigation (back button)
-window.addEventListener('popstate', loadProducts);
 
 // Global function to change images in carousel
 window.changeImage = function(event, productId, direction) {
@@ -191,7 +203,7 @@ window.changeImage = function(event, productId, direction) {
   }
   
   const imgEl = document.getElementById(`img-${productId}`);
-  imgEl.src = state.images[state.currentIndex];
+  imgEl.src = getAssetPath(state.images[state.currentIndex]);
   
   // Update dots
   const dotsContainer = document.getElementById(`dots-${productId}`);
@@ -206,7 +218,7 @@ window.changeImage = function(event, productId, direction) {
 // Global function to copy share link
 window.shareProduct = function(event, productId) {
   if (event) event.stopPropagation();
-  const url = `${window.location.origin}${window.location.pathname}?p=${productId}`;
+  const url = `${window.location.origin}/products/${productId}/`;
   
   navigator.clipboard.writeText(url).then(() => {
     const toast = document.getElementById('toast');
