@@ -238,11 +238,10 @@ function renderCatalog(products, container) {
         </div>`;
     } else if (product.instagramLink) {
       photoHtml = `
-        <div class="card-image-container" style="cursor:pointer;" onclick="event.stopPropagation();window.open('${product.instagramLink}','_blank')">
+        <div class="card-image-container" style="background:#fafafa;overflow:hidden;">
           ${product.category ? `<div class="card-category-badge">${emoji} ${product.category}</div>` : ''}
-          <div style="width:100%;height:100%;background:linear-gradient(135deg,#833ab4 0%,#fd1d1d 50%,#fcb045 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-            <svg style="width:48px;height:48px;fill:white;opacity:0.9;" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-            <span style="color:white;font-weight:600;font-size:13px;letter-spacing:0.3px;">View on Instagram</span>
+          <div style="width:100%;margin-top:-56px;">
+            <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF;border:0;margin:0 auto;padding:0;width:100%;max-width:100%;"></blockquote>
           </div>
         </div>`;
     } else {
@@ -346,7 +345,7 @@ function renderSingleProduct(product, container) {
         </div>
       </div>
     </div>
-    ${product.instagramLink && hasImages ? `
+    ${product.instagramLink ? `
       <div style="margin-top:4rem;text-align:center;">
         <h3 style="font-size:22px;font-weight:600;color:#222;margin-bottom:2rem;letter-spacing:-0.44px;">See it on Instagram</h3>
         <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:14px;box-shadow:rgba(0,0,0,0.04) 0 2px 6px;margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%;"></blockquote>
