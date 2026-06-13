@@ -91,7 +91,7 @@ function renderProductList() {
       <img src="${imgSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/60'">
       <div class="product-details">
         <h3>${product.name}</h3>
-        <p>${product.price}</p>
+        <p>${product.price && product.price.toString().startsWith('₹') ? product.price : '₹' + product.price}</p>
         <div style="margin-top: 0.5rem;">
           <span class="badge ${product.active ? '' : 'inactive'}">${product.active ? 'Active' : 'Inactive'}</span>
         </div>
@@ -112,10 +112,15 @@ function renderProductList() {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   
+  let priceVal = priceInput.value.trim();
+  if (priceVal && !priceVal.startsWith('₹')) {
+    priceVal = '₹' + priceVal;
+  }
+  
   const formData = new FormData();
   formData.append('id', productIdInput.value);
   formData.append('name', nameInput.value);
-  formData.append('price', priceInput.value);
+  formData.append('price', priceVal);
   formData.append('description', descInput.value);
   formData.append('whatsappMessage', whatsappInput.value);
   formData.append('active', activeInput.checked);
