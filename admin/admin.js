@@ -8,6 +8,7 @@ const productIdInput = document.getElementById('product-id');
 const nameInput = document.getElementById('name');
 const priceInput = document.getElementById('price');
 const descInput = document.getElementById('description');
+const categoryInput = document.getElementById('category');
 const whatsappInput = document.getElementById('whatsapp');
 const instagramInput = document.getElementById('instagramLink');
 const youtubeInput = document.getElementById('youtubeLink');
@@ -67,6 +68,7 @@ function showMessage(text, isError = false) {
 window.resetForm = function() {
   form.reset();
   productIdInput.value = '';
+  categoryInput.value = '';
   instagramInput.value = '';
   youtubeInput.value = '';
   formTitle.textContent = 'Add New Product';
@@ -79,9 +81,17 @@ async function loadProducts() {
     const res = await fetch(API_URL);
     allProducts = await res.json();
     renderProductList();
+    populateCategoryDatalist();
   } catch (error) {
     console.error('Failed to load products', error);
   }
+}
+
+function populateCategoryDatalist() {
+  const datalist = document.getElementById('category-suggestions');
+  if (!datalist) return;
+  const categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
+  datalist.innerHTML = categories.map(c => `<option value="${c}">`).join('');
 }
 
 // Render product list
@@ -107,8 +117,9 @@ function renderProductList() {
       <div class="product-details">
         <h3>${product.name}</h3>
         <p>${product.price && product.price.toString().startsWith('₹') ? product.price : '₹' + product.price}</p>
-        <div style="margin-top: 0.5rem;">
+        <div style="margin-top:0.5rem;display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
           <span class="badge ${product.active ? '' : 'inactive'}">${product.active ? 'Active' : 'Inactive'}</span>
+          ${product.category ? `<span class="badge" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;">${product.category}</span>` : ''}
         </div>
       </div>
       <div class="product-actions">
@@ -137,6 +148,7 @@ form.addEventListener('submit', async (e) => {
   formData.append('name', nameInput.value);
   formData.append('price', priceVal);
   formData.append('description', descInput.value);
+  formData.append('category', categoryInput.value.trim());
   formData.append('whatsappMessage', whatsappInput.value);
   formData.append('instagramLink', instagramInput.value);
   formData.append('youtubeLink', youtubeInput.value);
@@ -179,6 +191,7 @@ window.editProduct = function(id) {
   nameInput.value = product.name;
   priceInput.value = product.price;
   descInput.value = product.description;
+  categoryInput.value = product.category || '';
   whatsappInput.value = product.whatsappMessage || '';
   instagramInput.value = product.instagramLink || '';
   youtubeInput.value = product.youtubeLink || '';

@@ -155,7 +155,7 @@ app.get('/api/products', async (req, res) => {
 // Add or update product
 app.post('/api/products', upload.array('images', 5), async (req, res) => {
   try {
-    const { id, name, description, price, whatsappMessage, instagramLink, youtubeLink, active } = req.body;
+    const { id, name, description, price, category, whatsappMessage, instagramLink, youtubeLink, active } = req.body;
     let products = await readProducts();
     
     let productId = id;
@@ -199,6 +199,7 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
       id: productId,
       name,
       description,
+      category: category || '',
       price,
       whatsappMessage: whatsappMessage || `Hi! I'm interested in ordering: ${name} (${price})`,
       instagramLink: instagramLink || '',

@@ -2,6 +2,7 @@
   {
     "id": "corset-make-up-accessories-holder",
     "name": "Corset Make-up Accessories Holder",
+    "category": "Makeup Storage",
     "description": "The Corset Vanity Organizer: Where Elegance Meets Order\r\nTransform your beauty routine with our signature Corset-Inspired Makeup Accessories Holder. Designed with the intricate detailing of a vintage corset—including delicate lace-up aesthetics and structured paneling—this piece is more than just storage; it is a statement of refined style. Crafted to hold your brushes, eyeliners, and lipsticks with grace, it brings a touch of boudoir elegance to any vanity or dressing table.",
     "price": "₹169",
     "whatsappMessage": "Hi! I'm interested in ordering: Corset Make-up Accessories Holder (₹169)",
@@ -15,7 +16,8 @@
   {
     "id": "mermaid-accessories-storage-container",
     "name": "Mermaid Accessories Storage Container",
-    "description": "Keep your treasures tucked away in our enchanting Mermaid Accessories Storage Container. Whether you’re organizing hair clips, delicate jewelry, or sparkling trinkets, this container brings a splash of under-the-sea magic to any vanity or desk. Featuring a beautiful iridescent finish and a charming seashell-inspired design, it’s the perfect home for your most precious finds. Because every mermaid deserves a place to keep her treasures safe!",
+    "category": "Makeup Storage",
+    "description": "Keep your treasures tucked away in our enchanting Mermaid Accessories Storage Container. Whether you're organizing hair clips, delicate jewelry, or sparkling trinkets, this container brings a splash of under-the-sea magic to any vanity or desk. Featuring a beautiful iridescent finish and a charming seashell-inspired design, it's the perfect home for your most precious finds. Because every mermaid deserves a place to keep her treasures safe!",
     "price": "₹99",
     "whatsappMessage": "Hi! I'm interested in ordering: Mermaid Accessories Storage Container (₹99)",
     "instagramLink": "",
@@ -27,10 +29,11 @@
   },
   {
     "id": "bow-makeup-brush-holder",
-    "name": " Bow Makeup Brush Holder",
-    "description": "dd a touch of elegance to your vanity. ✨ Whether you prefer classic black, soft pink, cheerful yellow, or crisp white, there’s a bow-tie organizer for every aesthetic. Which color are you picking? 🎀#VanityGoals #MakeupOrganizer #BeautyRoom #BowTrend #MakeupStorage DeskDecor OrganizedBeauty\r\n",
+    "name": "Bow Makeup Brush Holder",
+    "category": "Makeup Storage",
+    "description": "Add a touch of elegance to your vanity. ✨ Whether you prefer classic black, soft pink, cheerful yellow, or crisp white, there's a bow-tie organizer for every aesthetic. Which color are you picking? 🎀#VanityGoals #MakeupOrganizer #BeautyRoom #BowTrend #MakeupStorage DeskDecor OrganizedBeauty\r\n",
     "price": "₹499",
-    "whatsappMessage": "Hi! I'm interested in ordering:  Bow Makeup Brush Holder (₹499)",
+    "whatsappMessage": "Hi! I'm interested in ordering: Bow Makeup Brush Holder (₹499)",
     "instagramLink": "https://www.instagram.com/reel/DZiQQaUhlOP/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     "youtubeLink": "",
     "active": true,
@@ -39,7 +42,8 @@
   {
     "id": "cotton-pad-ear-buds-holder",
     "name": "Cotton Pad & Ear Buds Holder",
-    "description": "levate your vanity game. ☁️✨ Our new ribbed organizer is the perfect home for your cotton pads and swabs—keeping your essentials neat, accessible, and oh-so-chic.\r\n#vanityorganization vanitygoals #bathroomorganization #skincareroutine #minimalistdecor #beautyessentials organizedhome bathroomstyling",
+    "category": "Vanity Essentials",
+    "description": "Elevate your vanity game. ☁️✨ Our new ribbed organizer is the perfect home for your cotton pads and swabs—keeping your essentials neat, accessible, and oh-so-chic.\r\n#vanityorganization vanitygoals #bathroomorganization #skincareroutine #minimalistdecor #beautyessentials organizedhome bathroomstyling",
     "price": "₹259",
     "whatsappMessage": "Hi! I'm interested in ordering: Cotton Pad & Ear Buds Holder (₹259)",
     "instagramLink": "https://www.instagram.com/reel/DZiOEBRsSr1/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
@@ -50,6 +54,7 @@
   {
     "id": "makeup-sponge-case",
     "name": "Makeup Sponge Case",
+    "category": "Makeup Storage",
     "description": "Keep Your Makeup Sponge Clean and Travel-Ready\r\nProtect your beauty sponge with this essential, ventilated makeup sponge case. Designed to keep your tools hygienic, the smart, slotted lid allows for airflow, ensuring your sponge dries properly and stays free from dust or makeup bag residue. Perfectly sized for your favorite beauty blender, this compact case is the ultimate solution for keeping your makeup application clean, whether at home or on the go.",
     "price": "₹139",
     "whatsappMessage": "Hi! I'm interested in ordering: Makeup Sponge Case (139)",
@@ -64,6 +69,7 @@
   {
     "id": "vanity-organizer",
     "name": "Vanity Organizer",
+    "category": "Vanity Essentials",
     "description": "Declutter your vanity with this stylish, multi-functional Makeup Organizer. Designed with a thoughtful, compartmentalized layout, it provides dedicated space for everything from makeup brushes and lipsticks to skincare bottles and compacts. Its chic pink finish and ribbed texture bring a modern, organized aesthetic to your space, ensuring your essential products are always tidy, protected, and right at your fingertips.",
     "price": "₹399",
     "whatsappMessage": "Hi! I'm interested in ordering: Vanity Organizer (399)",
@@ -79,7 +85,8 @@
   {
     "id": "hair-scrunchy-holder-stand",
     "name": "Hair Scrunchy Holder Stand",
-    "description": "Keep your favorite hair accessories neat and accessible with this minimalist Scrunchy Holder Stand. Featuring a sleek, modern design in a soft pink finish, it effortlessly declutters your vanity while turning your collection into a chic decorative display. Perfectly compact and stylish, it’s the ultimate accessory for an organized and beautiful morning routine.",
+    "category": "Hair Accessories",
+    "description": "Keep your favorite hair accessories neat and accessible with this minimalist Scrunchy Holder Stand. Featuring a sleek, modern design in a soft pink finish, it effortlessly declutters your vanity while turning your collection into a chic decorative display. Perfectly compact and stylish, it's the ultimate accessory for an organized and beautiful morning routine.",
     "price": "₹229",
     "whatsappMessage": "Hi! I'm interested in ordering: Hair Scrunchy Holder Stand (229)",
     "instagramLink": "https://www.instagram.com/reel/DZiMsKLh6uV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
@@ -92,6 +99,7 @@
   {
     "id": "compact-makeup-brush-cleaner-plate",
     "name": "Compact Makeup Brush Cleaner Plate",
+    "category": "Makeup Tools",
     "description": "The Compact Makeup Brush Cleaner Plate is a practical and efficient tool designed to deep-clean your brushes with ease. Its textured surface effectively lifts stubborn makeup residue, oils, and impurities from bristles while remaining gentle enough to prevent damage. Built from highly durable materials for long-lasting use, its compact, travel-friendly design makes it a perfect addition to any makeup kit or bathroom vanity.\r\n\r\nThis item is available in three vibrant colors: white, yellow, and pink.",
     "price": "₹99",
     "whatsappMessage": "Hi! I'm interested in ordering: Compact Makeup Brush Cleaner Plate (₹99)",
