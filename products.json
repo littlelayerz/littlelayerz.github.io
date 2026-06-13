@@ -1,11 +1,51 @@
 [
   {
+    "id": "cotton-pad-ear-buds-holder",
+    "name": "Cotton Pad & Ear Buds Holder",
+    "description": "levate your vanity game. ☁️✨ Our new ribbed organizer is the perfect home for your cotton pads and swabs—keeping your essentials neat, accessible, and oh-so-chic.\r\n#vanityorganization vanitygoals #bathroomorganization #skincareroutine #minimalistdecor #beautyessentials organizedhome bathroomstyling",
+    "price": "₹259",
+    "whatsappMessage": "Hi! I'm interested in ordering: Cotton Pad & Ear Buds Holder (₹259)",
+    "instagramLink": "https://www.instagram.com/reel/DZiOEBRsSr1/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    "youtubeLink": "",
+    "active": true,
+    "images": []
+  },
+  {
+    "id": "makeup-sponge-case",
+    "name": "Makeup Sponge Case",
+    "description": "Keep Your Makeup Sponge Clean and Travel-Ready\r\nProtect your beauty sponge with this essential, ventilated makeup sponge case. Designed to keep your tools hygienic, the smart, slotted lid allows for airflow, ensuring your sponge dries properly and stays free from dust or makeup bag residue. Perfectly sized for your favorite beauty blender, this compact case is the ultimate solution for keeping your makeup application clean, whether at home or on the go.",
+    "price": "₹139",
+    "whatsappMessage": "Hi! I'm interested in ordering: Makeup Sponge Case (139)",
+    "instagramLink": "https://www.instagram.com/reel/DZiLn4eMW0U/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/makeup-sponge-case-1781373072303-1.jpg",
+      "images/makeup-sponge-case-1781373072340-2.jpg"
+    ]
+  },
+  {
+    "id": "vanity-organizer",
+    "name": "Vanity Organizer",
+    "description": "Declutter your vanity with this stylish, multi-functional Makeup Organizer. Designed with a thoughtful, compartmentalized layout, it provides dedicated space for everything from makeup brushes and lipsticks to skincare bottles and compacts. Its chic pink finish and ribbed texture bring a modern, organized aesthetic to your space, ensuring your essential products are always tidy, protected, and right at your fingertips.",
+    "price": "₹399",
+    "whatsappMessage": "Hi! I'm interested in ordering: Vanity Organizer (399)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/vanity-organizer-1781372706873-1.jpg",
+      "images/vanity-organizer-1781372706899-2.jpg",
+      "images/vanity-organizer-1781372706926-3.jpg"
+    ]
+  },
+  {
     "id": "hair-scrunchy-holder-stand",
     "name": "Hair Scrunchy Holder Stand",
     "description": "Keep your favorite hair accessories neat and accessible with this minimalist Scrunchy Holder Stand. Featuring a sleek, modern design in a soft pink finish, it effortlessly declutters your vanity while turning your collection into a chic decorative display. Perfectly compact and stylish, it’s the ultimate accessory for an organized and beautiful morning routine.",
     "price": "₹229",
     "whatsappMessage": "Hi! I'm interested in ordering: Hair Scrunchy Holder Stand (229)",
-    "instagramLink": "",
+    "instagramLink": "https://www.instagram.com/reel/DZiMsKLh6uV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     "youtubeLink": "",
     "active": true,
     "images": [
