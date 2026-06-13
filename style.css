@@ -389,15 +389,36 @@ main {
 
 .btn-whatsapp {
   flex-grow: 1;
-  background: var(--text-heading);
+  background: #115e35; /* Luxury Green */
   color: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(17, 94, 53, 0.2);
 }
 
 .btn-whatsapp:hover {
-  background: #25D366; /* Reveal WhatsApp brand color on hover */
+  background: #0d4727;
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(37, 211, 102, 0.25);
+  box-shadow: 0 10px 24px rgba(17, 94, 53, 0.3);
+}
+
+.btn-social {
+  padding: 0;
+  width: 50px;
+}
+
+.btn-instagram {
+  background: #E1306C;
+  color: white;
+}
+
+.btn-youtube {
+  background: #FF0000;
+  color: white;
+}
+
+.btn-instagram:hover, .btn-youtube:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn-share {

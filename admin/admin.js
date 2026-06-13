@@ -9,6 +9,8 @@ const nameInput = document.getElementById('name');
 const priceInput = document.getElementById('price');
 const descInput = document.getElementById('description');
 const whatsappInput = document.getElementById('whatsapp');
+const instagramInput = document.getElementById('instagramLink');
+const youtubeInput = document.getElementById('youtubeLink');
 const imagesInput = document.getElementById('images');
 const activeInput = document.getElementById('active');
 const productList = document.getElementById('product-list');
@@ -54,6 +56,8 @@ function showMessage(text, isError = false) {
 window.resetForm = function() {
   form.reset();
   productIdInput.value = '';
+  instagramInput.value = '';
+  youtubeInput.value = '';
   formTitle.textContent = 'Add New Product';
   imagePreview.innerHTML = '';
 };
@@ -123,6 +127,8 @@ form.addEventListener('submit', async (e) => {
   formData.append('price', priceVal);
   formData.append('description', descInput.value);
   formData.append('whatsappMessage', whatsappInput.value);
+  formData.append('instagramLink', instagramInput.value);
+  formData.append('youtubeLink', youtubeInput.value);
   formData.append('active', activeInput.checked);
   
   if (imagesInput.files) {
@@ -163,6 +169,8 @@ window.editProduct = function(id) {
   priceInput.value = product.price;
   descInput.value = product.description;
   whatsappInput.value = product.whatsappMessage || '';
+  instagramInput.value = product.instagramLink || '';
+  youtubeInput.value = product.youtubeLink || '';
   activeInput.checked = product.active;
   
   // Clear images input since we can't pre-fill file inputs
