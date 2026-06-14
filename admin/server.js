@@ -220,14 +220,27 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
       active: active === 'true' || active === true
     };
 
+    let keepImages = null;
+    if (req.body.keepImages) {
+      try {
+        keepImages = JSON.parse(req.body.keepImages);
+      } catch (e) {
+        console.error('Failed to parse keepImages:', e);
+      }
+    }
+
     if (isNew) {
       productData.images = newImagePaths;
       products.unshift(productData);
     } else {
       const index = products.findIndex(p => p.id === productId);
       if (index !== -1) {
-        // Keep existing images if no new ones are uploaded
-        productData.images = newImagePaths.length > 0 ? newImagePaths : products[index].images;
+        if (keepImages !== null) {
+          productData.images = [...keepImages, ...newImagePaths];
+        } else {
+          // Keep existing images if no new ones are uploaded
+          productData.images = newImagePaths.length > 0 ? newImagePaths : products[index].images;
+        }
         products[index] = productData;
       }
     }

@@ -133,6 +133,39 @@
       border-radius: 4px;
       border: 1px solid var(--border);
     }
+    .image-preview-item {
+      position: relative;
+      display: inline-block;
+    }
+    .image-preview-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .image-preview-item .remove-btn {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--danger);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1.5px solid white;
+      font-weight: bold;
+      line-height: 1;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    }
+    .image-preview-item .remove-btn:hover {
+      background: #dc2626;
+    }
   </style>
 </head>
 <body>
@@ -185,8 +218,20 @@
         <div class="form-group">
           <label for="images">Images</label>
           <input type="file" id="images" class="form-control" multiple accept="image/*">
-          <div id="image-preview" class="image-preview"></div>
-          <small style="color: #6b7280; font-size: 0.75rem;">Leave empty when editing to keep existing images.</small>
+          
+          <!-- Existing Images Container -->
+          <div id="existing-images-container" style="display: none; margin-top: 0.75rem;">
+            <label style="font-size: 0.8rem; color: #4b5563; font-weight: 500; display: block; margin-bottom: 0.25rem;">Current Images (click &times; to remove):</label>
+            <div id="existing-images-preview" class="image-preview"></div>
+          </div>
+          
+          <!-- New Images Preview Container -->
+          <div id="new-images-container" style="display: none; margin-top: 0.75rem;">
+            <label style="font-size: 0.8rem; color: #4b5563; font-weight: 500; display: block; margin-bottom: 0.25rem;">New Images Preview:</label>
+            <div id="image-preview" class="image-preview"></div>
+          </div>
+          
+          <small id="images-help-text" style="color: #6b7280; font-size: 0.75rem; display: block; margin-top: 0.25rem;">Upload new images to add them to this product. You can manage existing images above.</small>
         </div>
         
         <div class="form-group checkbox-group">

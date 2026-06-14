@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:3000/api/products';
 let allProducts = [];
+let currentImagesToKeep = [];
 
 // DOM Elements
 const form = document.getElementById('product-form');
@@ -44,13 +45,17 @@ priceInput.addEventListener('input', (e) => {
 
 // Preview selected images
 imagesInput.addEventListener('change', function() {
+  const newContainer = document.getElementById('new-images-container');
   imagePreview.innerHTML = '';
-  if (this.files) {
+  if (this.files && this.files.length > 0) {
+    newContainer.style.display = 'block';
     Array.from(this.files).forEach(file => {
       const img = document.createElement('img');
       img.src = URL.createObjectURL(file);
       imagePreview.appendChild(img);
     });
+  } else {
+    newContainer.style.display = 'none';
   }
 });
 
@@ -73,6 +78,10 @@ window.resetForm = function() {
   youtubeInput.value = '';
   formTitle.textContent = 'Add New Product';
   imagePreview.innerHTML = '';
+  currentImagesToKeep = [];
+  document.getElementById('existing-images-container').style.display = 'none';
+  document.getElementById('existing-images-preview').innerHTML = '';
+  document.getElementById('new-images-container').style.display = 'none';
 };
 
 // Load products
@@ -160,6 +169,10 @@ form.addEventListener('submit', async (e) => {
     });
   }
   
+  if (productIdInput.value) {
+    formData.append('keepImages', JSON.stringify(currentImagesToKeep));
+  }
+  
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
@@ -201,16 +214,45 @@ window.editProduct = function(id) {
   imagesInput.value = '';
   
   // Show existing images in preview
-  imagePreview.innerHTML = '';
-  if (product.images) {
-    product.images.forEach(img => {
-      const el = document.createElement('img');
-      el.src = `../${img}`;
-      imagePreview.appendChild(el);
-    });
-  }
+  currentImagesToKeep = product.images ? [...product.images] : [];
+  renderExistingImages();
   
   window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// Render existing images with remove button
+window.renderExistingImages = function() {
+  const container = document.getElementById('existing-images-container');
+  const preview = document.getElementById('existing-images-preview');
+  if (!preview || !container) return;
+  
+  preview.innerHTML = '';
+  
+  if (currentImagesToKeep.length > 0) {
+    container.style.display = 'block';
+    currentImagesToKeep.forEach((img, idx) => {
+      const item = document.createElement('div');
+      item.className = 'image-preview-item';
+      
+      const imageEl = document.createElement('img');
+      imageEl.src = `../${img}`;
+      imageEl.alt = 'Product image';
+      
+      const removeBtn = document.createElement('span');
+      removeBtn.className = 'remove-btn';
+      removeBtn.innerHTML = '&times;';
+      removeBtn.onclick = () => {
+        currentImagesToKeep.splice(idx, 1);
+        renderExistingImages();
+      };
+      
+      item.appendChild(imageEl);
+      item.appendChild(removeBtn);
+      preview.appendChild(item);
+    });
+  } else {
+    container.style.display = 'none';
+  }
 };
 
 // Delete product

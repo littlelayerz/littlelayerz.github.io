@@ -1,5 +1,50 @@
 [
   {
+    "id": "cute-cat-phone-stand",
+    "name": "Cute cat phone stand",
+    "description": "Add a playful touch to your desk with this adorable cat-shaped phone stand. Designed with a sleek and artistic silhouette, it combines charm with practicality while serving as a stylish accent piece for any workspace, bedside table, or gaming setup",
+    "category": "Home Decor",
+    "price": "₹139",
+    "whatsappMessage": "Hi! I'm interested in ordering: Cute cat phone stand (₹139)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/cute-cat-phone-stand-1781440923078-1.jpg",
+      "images/cute-cat-phone-stand-1781440923112-2.jpg"
+    ]
+  },
+  {
+    "id": "modern-face-planter-pot",
+    "name": "Modern Face Planter Pot",
+    "description": "Add a touch of artistic elegance to your home with this unique face planter, featuring a minimalist sculpted design embraced by delicate hands. Perfect for showcasing small plants, succulents, or artificial greenery, this decorative planter effortlessly blends modern aesthetics with functionality. Its eye-catching design makes it an ideal accent piece for living rooms, bedrooms, offices, shelves, and tabletops.",
+    "category": "Home Decor",
+    "price": "₹399",
+    "whatsappMessage": "Hi! I'm interested in ordering: Modern Face Planter Pot (₹399)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/modern-face-planter-pot-1781440253483-1.jpg",
+      "images/modern-face-planter-pot-1781440253522-2.jpg",
+      "images/modern-face-planter-pot-1781440253544-3.jpg"
+    ]
+  },
+  {
+    "id": "zen-goddess-incense-holder",
+    "name": "Zen Goddess Incense Holder ",
+    "description": "Bring peace and elegance to your home with this beautifully crafted Zen-inspired incense holder. Featuring a serene meditating goddess seated on a lotus base, this decorative piece combines functionality with artistic charm. The integrated tray catches ash neatly, making it perfect for meditation, yoga, relaxation, and home décor.",
+    "category": "Home Decor",
+    "price": "₹299",
+    "whatsappMessage": "Hi! I'm interested in ordering: Zen Goddess Incense Holder  (₹299)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/zen-goddess-incense-holder-1781437006090-1.jpg"
+    ]
+  },
+  {
     "id": "heart-shaped-desk-organizer-stationery-holder",
     "name": "Heart-Shaped Desk Organizer & Stationery Holder",
     "description": "Keep your workspace neat and stylish with this adorable heart-shaped desk organizer. Designed with multiple compartments, it provides a convenient way to store pens, pencils, markers, sticky notes, erasers, and other desk essentials. Its modern ribbed texture and cute aesthetic make it a perfect addition to study tables, offices, classrooms, and creative spaces.",
@@ -98,16 +143,14 @@
   {
     "id": "vanity-organizer",
     "name": "Vanity Organizer",
-    "category": "Vanity Essentials",
     "description": "Declutter your vanity with this stylish, multi-functional Makeup Organizer. Designed with a thoughtful, compartmentalized layout, it provides dedicated space for everything from makeup brushes and lipsticks to skincare bottles and compacts. Its chic pink finish and ribbed texture bring a modern, organized aesthetic to your space, ensuring your essential products are always tidy, protected, and right at your fingertips.",
+    "category": "Vanity Essentials",
     "price": "₹399",
     "whatsappMessage": "Hi! I'm interested in ordering: Vanity Organizer (399)",
-    "instagramLink": "",
+    "instagramLink": "https://www.instagram.com/reel/DZjpyhshTO-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     "youtubeLink": "",
     "active": true,
     "images": [
-      "images/vanity-organizer-1781372706873-1.jpg",
-      "images/vanity-organizer-1781372706899-2.jpg",
       "images/vanity-organizer-1781372706926-3.jpg"
     ]
   },
