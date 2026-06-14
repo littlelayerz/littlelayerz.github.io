@@ -1,5 +1,22 @@
 [
   {
+    "id": "lip-balm-holder-key-chain",
+    "name": "Lip Balm Holder Key Chain",
+    "description": "Why worry now? Get the best of both worlds with a classy key chain that securely holds your daily-use lip balm. No more digging through your bag or worrying about the cap opening accidentally and creating a mess.",
+    "category": "",
+    "price": "₹99",
+    "whatsappMessage": "Hi! I'm interested in ordering: Lip Balm Holder Key Chain (₹99)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/lip-balm-holder-key-chain-1781442976619-1.jpg",
+      "images/lip-balm-holder-key-chain-1781442976657-2.jpg",
+      "images/lip-balm-holder-key-chain-1781442976682-3.jpg",
+      "images/lip-balm-holder-key-chain-1781442976699-4.jpg"
+    ]
+  },
+  {
     "id": "cute-cat-phone-stand",
     "name": "Cute cat phone stand",
     "description": "Add a playful touch to your desk with this adorable cat-shaped phone stand. Designed with a sleek and artistic silhouette, it combines charm with practicality while serving as a stylish accent piece for any workspace, bedside table, or gaming setup",
