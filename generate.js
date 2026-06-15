@@ -14,6 +14,10 @@ async function run() {
   const productsStr = await fs.readFile('products.json', 'utf8');
   const products = JSON.parse(productsStr);
 
+  const sitemapUrls = [
+    'https://littlelayerz.github.io/'
+  ];
+
   for (const product of products) {
     if (!product.active) continue;
     
@@ -23,13 +27,16 @@ async function run() {
     const ogImage = product.images && product.images.length > 0 
       ? `https://littlelayerz.github.io/${product.images[0]}` 
       : 'https://littlelayerz.github.io/images/default.jpg';
+    sitemapUrls.push(`https://littlelayerz.github.io/products/${product.id}/`);
       
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Little Layerz | Premium Custom Products</title>
+  <title>${product.name} | Little Layerz</title>
+  <meta name="description" content="${product.description}">
+  <link rel="canonical" href="https://littlelayerz.github.io/products/${product.id}/">
   <link rel="icon" type="image/png" href="../../favicon.png">
   
   <meta property="og:title" content="${product.name} - Little Layerz">
@@ -38,9 +45,47 @@ async function run() {
   <meta property="og:url" content="https://littlelayerz.github.io/products/${product.id}/">
   <meta property="og:type" content="product">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${product.name} - Little Layerz">
+  <meta name="twitter:description" content="${product.description}">
+  <meta name="twitter:image" content="${ogImage}">
   
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "${product.name}",
+    "image": "${ogImage}",
+    "description": "${product.description}",
+    "brand": {
+      "@type": "Brand",
+      "name": "Little Layerz"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://littlelayerz.github.io/products/${product.id}/",
+      "priceCurrency": "INR",
+      "price": "${product.price || 0}",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Little Layerz"
+      }
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="../../style.css">
   <script>window.PRODUCT_SLUG = "${product.id}";</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MRG2TT80EL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MRG2TT80EL');
+  </script>
 </head>
 <body>
   <header>
@@ -104,7 +149,18 @@ async function run() {
 </html>`;
     await fs.writeFile(path.join(productDir, 'index.html'), htmlContent, 'utf8');
   }
-  console.log('Static pages generated!');
+  
+  // Generate sitemap.xml
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.map(url => `  <url>
+    <loc>${url}</loc>
+    <changefreq>weekly</changefreq>
+  </url>`).join('\n')}
+</urlset>`;
+
+  await fs.writeFile(path.join(rootDir, 'sitemap.xml'), sitemapXml, 'utf8');
+  console.log('Static pages and sitemap.xml generated!');
 }
 
 run();

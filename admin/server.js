@@ -110,6 +110,16 @@ async function generateStaticPages(products) {
   <script async src="//www.instagram.com/embed.js"></script>
   <link rel="stylesheet" href="../../style.css">
   <script>window.PRODUCT_SLUG = "${product.id}";</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MRG2TT80EL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MRG2TT80EL');
+  </script>
 </head>
 <body>
   <header>

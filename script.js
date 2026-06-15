@@ -178,17 +178,18 @@ function renderRecentlyViewed(allActive) {
   if (products.length === 0) return;
 
   grid.innerHTML = products.map(product => {
-    const thumb = getCardThumbnail(product);
+    const imgSrc = product.images && product.images.length > 0 
+      ? getAssetPath(product.images[0]) 
+      : 'https://via.placeholder.com/60';
+      
     return `
-      <div class="product-card" onclick="navigateToProduct('${product.id}')" style="cursor:pointer;">
-        <div class="card-image-container" style="aspect-ratio:1/1;">
-          ${thumb}
+      <div class="recently-viewed-card" onclick="navigateToProduct('${product.id}')" style="cursor:pointer;">
+        <div class="rv-image-container">
+          <img src="${imgSrc}" alt="${product.name}" class="rv-image" loading="lazy">
         </div>
-        <div class="card-meta">
-          <div class="card-meta-row">
-            <span class="card-title">${product.name}</span>
-            <span class="card-price">${formatPrice(product.price)}</span>
-          </div>
+        <div class="rv-meta">
+          <span class="rv-title">${product.name}</span>
+          <span class="rv-price">${formatPrice(product.price)}</span>
         </div>
       </div>`;
   }).join('');
@@ -290,6 +291,12 @@ function renderCatalog(products, container) {
 // =====================
 function renderSingleProduct(product, container) {
   document.getElementById('catalog-intro').style.display = 'none';
+  
+  // Hide homepage features and about us on single product view
+  const homeFeatures = document.getElementById('homepage-features');
+  if (homeFeatures) homeFeatures.style.display = 'none';
+  const aboutUs = document.getElementById('about-us');
+  if (aboutUs) aboutUs.style.display = 'none';
 
   container.className = 'single-product-container';
   productCarousels[product.id] = { images: product.images || [], currentIndex: 0 };
@@ -461,7 +468,61 @@ document.addEventListener('keydown', (e) => {
 });
 
 // =====================
+// HOMEPAGE HERO CAROUSEL
+// =====================
+let heroCurrentIndex = 0;
+let heroInterval;
+
+window.moveHeroSlide = function(direction) {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  if (slides.length === 0) return;
+  
+  slides[heroCurrentIndex].classList.remove('active');
+  dots[heroCurrentIndex].classList.remove('active');
+  
+  heroCurrentIndex = (heroCurrentIndex + direction + slides.length) % slides.length;
+  
+  slides[heroCurrentIndex].classList.add('active');
+  dots[heroCurrentIndex].classList.add('active');
+  
+  resetHeroTimer();
+};
+
+window.setHeroSlide = function(index) {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  if (slides.length === 0) return;
+  
+  slides[heroCurrentIndex].classList.remove('active');
+  dots[heroCurrentIndex].classList.remove('active');
+  
+  heroCurrentIndex = index;
+  
+  slides[heroCurrentIndex].classList.add('active');
+  dots[heroCurrentIndex].classList.add('active');
+  
+  resetHeroTimer();
+};
+
+function startHeroTimer() {
+  heroInterval = setInterval(() => {
+    moveHeroSlide(1);
+  }, 5000);
+}
+
+function resetHeroTimer() {
+  clearInterval(heroInterval);
+  startHeroTimer();
+}
+
+// =====================
 // INIT
 // =====================
 document.getElementById('year').textContent = new Date().getFullYear();
-document.addEventListener('DOMContentLoaded', loadProducts);
+document.addEventListener('DOMContentLoaded', () => {
+  loadProducts();
+  if (document.getElementById('hero-carousel')) {
+    startHeroTimer();
+  }
+});
