@@ -3,27 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Take your adventures hands-free with the Outdoor Phone Stand, designed for campers, hikers, and everyday explorers. Its compact, lightweight design easily clips onto your backpack, making it convenient to carry wherever you go.
-
-Built with durability in mind, this stand provides a stable viewing angle for maps, videos, or calls, whether you’re at a campsite, on a hiking trail, or relaxing outdoors. Tough, portable, and always ready for your next journey.">
-  
-  <!-- Open Graph / WhatsApp / Social Previews -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://littlelayerz.github.io/products/travel-phone-stand-compact-and-durable/">
+  <title>Little Layerz | Premium Custom Products</title>
   <link rel="icon" type="image/png" href="../../favicon.png">
-  <meta property="og:title" content="Travel Phone stand - compact and durable | Little Layerz">
+  
+  <meta property="og:title" content="Travel Phone stand - compact and durable - Little Layerz">
   <meta property="og:description" content="Take your adventures hands-free with the Outdoor Phone Stand, designed for campers, hikers, and everyday explorers. Its compact, lightweight design easily clips onto your backpack, making it convenient to carry wherever you go.
 
 Built with durability in mind, this stand provides a stable viewing angle for maps, videos, or calls, whether you’re at a campsite, on a hiking trail, or relaxing outdoors. Tough, portable, and always ready for your next journey.">
   <meta property="og:image" content="https://littlelayerz.github.io/images/travel-phone-stand-compact-and-durable-1781453308663-1.jpg">
+  <meta property="og:url" content="https://littlelayerz.github.io/products/travel-phone-stand-compact-and-durable/">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
   
-  <title>Travel Phone stand - compact and durable | Little Layerz</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  
-  <script async src="//www.instagram.com/embed.js"></script>
   <link rel="stylesheet" href="../../style.css">
   <script>window.PRODUCT_SLUG = "travel-phone-stand-compact-and-durable";</script>
 </head>
@@ -76,9 +67,11 @@ Built with durability in mind, this stand provides a stable viewing angle for ma
   </footer>
 
   <div id="toast" class="toast">Link copied to clipboard!</div>
-  <div id="image-modal" class="modal" onclick="this.style.display='none'">
-    <span class="modal-close">&times;</span>
-    <img class="modal-content" id="modal-img">
+  <div id="image-modal" class="modal" onclick="if(event.target === this) this.style.display='none'">
+    <span class="modal-close" onclick="document.getElementById('image-modal').style.display='none'">&times;</span>
+    <button class="modal-btn modal-prev" onclick="changeModalImage(-1, event)" aria-label="Previous image">❮</button>
+    <img class="modal-content" id="modal-img" onclick="event.stopPropagation()">
+    <button class="modal-btn modal-next" onclick="changeModalImage(1, event)" aria-label="Next image">❯</button>
   </div>
 
   <script async src="//www.instagram.com/embed.js"></script>

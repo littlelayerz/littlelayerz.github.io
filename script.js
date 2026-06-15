@@ -59,7 +59,7 @@ function addRecentlyViewed(productId) {
 // =====================
 function getCardThumbnail(product) {
   if (product.images && product.images.length > 0) {
-    return `<img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" loading="lazy" onclick="openModal(event, this.src)">`;
+    return `<img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" loading="lazy" onclick="openModal(event, '${product.id}')">`;
   } else if (product.instagramLink) {
     return `
       <div style="width:100%;height:100%;overflow:hidden;pointer-events:none;margin-top:-56px;">
@@ -228,7 +228,7 @@ function renderCatalog(products, container) {
       photoHtml = `
         <div class="card-image-container">
           ${product.category ? `<div class="card-category-badge">${emoji} ${product.category}</div>` : ''}
-          <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" loading="lazy" onclick="openModal(event, this.src)">
+          <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" loading="lazy" onclick="openModal(event, '${product.id}')">
           ${hasMultiple ? `
             <button class="carousel-btn carousel-prev" onclick="changeImage(event,'${product.id}',-1)" aria-label="Previous">❮</button>
             <button class="carousel-btn carousel-next" onclick="changeImage(event,'${product.id}',1)" aria-label="Next">❯</button>
@@ -303,7 +303,7 @@ function renderSingleProduct(product, container) {
   if (hasImages) {
     mediaHtml = `
       <div class="card-image-container single-view-image">
-        <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, this.src)">
+        <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, '${product.id}')">
         ${hasMultiple ? `
           <button class="carousel-btn carousel-prev" onclick="changeImage(event,'${product.id}',-1)" aria-label="Previous">❮</button>
           <button class="carousel-btn carousel-next" onclick="changeImage(event,'${product.id}',1)" aria-label="Next">❯</button>
@@ -405,15 +405,59 @@ window.shareProduct = function(event, productId) {
 // =====================
 // MODAL
 // =====================
-window.openModal = function(event, src) {
+let modalImages = [];
+let modalCurrentIndex = 0;
+
+window.openModal = function(event, productId) {
   if (event) event.stopPropagation();
+  const state = productCarousels[productId];
+  if (!state || !state.images || state.images.length === 0) return;
+  
+  modalImages = state.images;
+  modalCurrentIndex = state.currentIndex;
+  
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-img');
   if (modal && modalImg) {
-    modalImg.src = src;
-    modal.style.display = 'block';
+    modalImg.src = getAssetPath(modalImages[modalCurrentIndex]);
+    modal.style.display = 'flex';
+    
+    // Toggle prev/next buttons based on whether there are multiple images
+    const prevBtn = modal.querySelector('.modal-prev');
+    const nextBtn = modal.querySelector('.modal-next');
+    if (prevBtn && nextBtn) {
+      const showButtons = modalImages.length > 1 ? 'flex' : 'none';
+      prevBtn.style.display = showButtons;
+      nextBtn.style.display = showButtons;
+    }
   }
 };
+
+window.changeModalImage = function(direction, event) {
+  if (event) event.stopPropagation();
+  if (modalImages.length <= 1) return;
+  
+  modalCurrentIndex = (modalCurrentIndex + direction + modalImages.length) % modalImages.length;
+  
+  const modalImg = document.getElementById('modal-img');
+  if (modalImg) {
+    modalImg.src = getAssetPath(modalImages[modalCurrentIndex]);
+  }
+};
+
+// Keyboard navigation for modal
+document.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('image-modal');
+  if (!modal || modal.style.display !== 'flex') return;
+  
+  if (e.key === 'ArrowLeft') {
+    changeModalImage(-1);
+  } else if (e.key === 'ArrowRight') {
+    changeModalImage(1);
+  } else if (e.key === 'Escape') {
+    modal.style.display = 'none';
+  }
+});
 
 // =====================
 // INIT

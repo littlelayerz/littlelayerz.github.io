@@ -141,9 +141,11 @@ async function generateStaticPages(products) {
   </footer>
 
   <div id="toast" class="toast">Link copied to clipboard!</div>
-  <div id="image-modal" class="modal" onclick="this.style.display='none'">
-    <span class="modal-close">&times;</span>
-    <img class="modal-content" id="modal-img">
+  <div id="image-modal" class="modal" onclick="if(event.target === this) this.style.display='none'">
+    <span class="modal-close" onclick="document.getElementById('image-modal').style.display='none'">&times;</span>
+    <button class="modal-btn modal-prev" onclick="changeModalImage(-1, event)" aria-label="Previous image">❮</button>
+    <img class="modal-content" id="modal-img" onclick="event.stopPropagation()">
+    <button class="modal-btn modal-next" onclick="changeModalImage(1, event)" aria-label="Next image">❯</button>
   </div>
 
   <script async src="//www.instagram.com/embed.js"></script>

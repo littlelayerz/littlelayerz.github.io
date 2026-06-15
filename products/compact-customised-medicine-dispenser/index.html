@@ -3,18 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Your Daily Essentials, Always Within Reach!
-
-Stay organized wherever life takes you. This sleek and pocket-friendly medicine holder keeps your tablets safe, secure, and easy to carry. Perfect for travel, office, gym, or everyday use.
-
-✔️ Compact & Lightweight
-✔️ Easy Access Design">
-  
-  <!-- Open Graph / WhatsApp / Social Previews -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://littlelayerz.github.io/products/compact-customised-medicine-dispenser/">
+  <title>Little Layerz | Premium Custom Products</title>
   <link rel="icon" type="image/png" href="../../favicon.png">
-  <meta property="og:title" content="Compact Customised Medicine Dispenser | Little Layerz">
+  
+  <meta property="og:title" content="Compact Customised Medicine Dispenser - Little Layerz">
   <meta property="og:description" content="Your Daily Essentials, Always Within Reach!
 
 Stay organized wherever life takes you. This sleek and pocket-friendly medicine holder keeps your tablets safe, secure, and easy to carry. Perfect for travel, office, gym, or everyday use.
@@ -22,14 +14,10 @@ Stay organized wherever life takes you. This sleek and pocket-friendly medicine 
 ✔️ Compact & Lightweight
 ✔️ Easy Access Design">
   <meta property="og:image" content="https://littlelayerz.github.io/images/compact-customised-medicine-dispenser-1781530936609-1.jpg">
+  <meta property="og:url" content="https://littlelayerz.github.io/products/compact-customised-medicine-dispenser/">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
   
-  <title>Compact Customised Medicine Dispenser | Little Layerz</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  
-  <script async src="//www.instagram.com/embed.js"></script>
   <link rel="stylesheet" href="../../style.css">
   <script>window.PRODUCT_SLUG = "compact-customised-medicine-dispenser";</script>
 </head>
@@ -82,9 +70,11 @@ Stay organized wherever life takes you. This sleek and pocket-friendly medicine 
   </footer>
 
   <div id="toast" class="toast">Link copied to clipboard!</div>
-  <div id="image-modal" class="modal" onclick="this.style.display='none'">
-    <span class="modal-close">&times;</span>
-    <img class="modal-content" id="modal-img">
+  <div id="image-modal" class="modal" onclick="if(event.target === this) this.style.display='none'">
+    <span class="modal-close" onclick="document.getElementById('image-modal').style.display='none'">&times;</span>
+    <button class="modal-btn modal-prev" onclick="changeModalImage(-1, event)" aria-label="Previous image">❮</button>
+    <img class="modal-content" id="modal-img" onclick="event.stopPropagation()">
+    <button class="modal-btn modal-next" onclick="changeModalImage(1, event)" aria-label="Next image">❯</button>
   </div>
 
   <script async src="//www.instagram.com/embed.js"></script>
