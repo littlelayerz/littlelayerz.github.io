@@ -1,5 +1,22 @@
 [
   {
+    "id": "bunny-phone-stand",
+    "name": "Bunny Phone Stand",
+    "description": "🐰✨ Cute, Compact & Uniquely Yours!\r\n\r\nMeet our adorable Bunny Phone Stand – designed to keep your phone secure while adding a touch of charm to your desk. 💕\r\n\r\n🌸 Foldable & Portable\r\n🌸 Perfect for Video Calls & Watching Content\r\n🌸 Lightweight & Easy to Carry\r\n🌸 Personalized with Your Name\r\n🌸 Available in Custom Colors",
+    "category": "Phone Accessories",
+    "price": "₹149",
+    "whatsappMessage": "Hi! I'm interested in ordering: Bunny Phone Stand (₹149)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/bunny-phone-stand-4GTYN-1.jpg",
+      "images/bunny-phone-stand-IMSGT-2.jpg",
+      "images/bunny-phone-stand-H4M3A-3.jpg"
+    ],
+    "sku": "LL-96848"
+  },
+  {
     "id": "compact-customised-medicine-dispenser",
     "name": "Compact Customised Medicine Dispenser",
     "description": "Your Daily Essentials, Always Within Reach!\r\n\r\nStay organized wherever life takes you. This sleek and pocket-friendly medicine holder keeps your tablets safe, secure, and easy to carry. Perfect for travel, office, gym, or everyday use.\r\n\r\n✔️ Compact & Lightweight\r\n✔️ Easy Access Design",
@@ -14,7 +31,8 @@
       "images/compact-customised-medicine-dispenser-1781530936669-2.jpg",
       "images/compact-customised-medicine-dispenser-1781530936692-3.jpg",
       "images/compact-customised-medicine-dispenser-1781530936711-4.jpg"
-    ]
+    ],
+    "sku": "LL-83305"
   },
   {
     "id": "travel-toothbrush-holder-compact-hygienic",
@@ -30,7 +48,8 @@
       "images/travel-toothbrush-holder-compact-hygienic-1781453358435-1.jpg",
       "images/travel-toothbrush-holder-compact-hygienic-1781453358473-2.jpg",
       "images/travel-toothbrush-holder-compact-hygienic-1781453358497-3.jpg"
-    ]
+    ],
+    "sku": "LL-33067"
   },
   {
     "id": "travel-phone-stand-compact-and-durable",
@@ -46,7 +65,8 @@
       "images/travel-phone-stand-compact-and-durable-1781453308663-1.jpg",
       "images/travel-phone-stand-compact-and-durable-1781453308705-2.jpg",
       "images/travel-phone-stand-compact-and-durable-1781453308731-3.jpg"
-    ]
+    ],
+    "sku": "LL-91437"
   },
   {
     "id": "lip-balm-holder-key-chain",
@@ -63,7 +83,8 @@
       "images/lip-balm-holder-key-chain-1781442976657-2.jpg",
       "images/lip-balm-holder-key-chain-1781442976682-3.jpg",
       "images/lip-balm-holder-key-chain-1781442976699-4.jpg"
-    ]
+    ],
+    "sku": "LL-29273"
   },
   {
     "id": "cute-cat-phone-stand",
@@ -79,7 +100,8 @@
       "images/cute-cat-phone-stand-1781440923078-1.jpg",
       "images/cute-cat-phone-stand-1781440923112-2.jpg",
       "images/cute-cat-phone-stand-1781448383677-1.jpg"
-    ]
+    ],
+    "sku": "LL-98547"
   },
   {
     "id": "modern-face-planter-pot",
@@ -95,7 +117,8 @@
       "images/modern-face-planter-pot-1781440253483-1.jpg",
       "images/modern-face-planter-pot-1781440253522-2.jpg",
       "images/modern-face-planter-pot-1781440253544-3.jpg"
-    ]
+    ],
+    "sku": "LL-46433"
   },
   {
     "id": "zen-goddess-incense-holder",
@@ -109,7 +132,8 @@
     "active": true,
     "images": [
       "images/zen-goddess-incense-holder-1781437006090-1.jpg"
-    ]
+    ],
+    "sku": "LL-84315"
   },
   {
     "id": "heart-shaped-desk-organizer-stationery-holder",
@@ -124,7 +148,8 @@
     "images": [
       "images/heart-shaped-desk-organizer-stationery-holder-1781436577678-1.jpg",
       "images/heart-shaped-desk-organizer-stationery-holder-1781436577717-2.jpg"
-    ]
+    ],
+    "sku": "LL-93391"
   },
   {
     "id": "tissue-holder",
@@ -139,7 +164,8 @@
     "images": [
       "images/tissue-holder-1781436351782-1.jpg",
       "images/tissue-holder-1781436351819-2.jpg"
-    ]
+    ],
+    "sku": "LL-39862"
   },
   {
     "id": "corset-make-up-accessories-holder",
@@ -152,7 +178,8 @@
     "active": true,
     "images": [
       "images/corset-make-up-accessories-holder-1781376431666-1.jpg"
-    ]
+    ],
+    "sku": "LL-47984"
   },
   {
     "id": "bow-makeup-brush-holder",
@@ -164,7 +191,8 @@
     "instagramLink": "https://www.instagram.com/reel/DZiQQaUhlOP/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     "youtubeLink": "",
     "active": true,
-    "images": []
+    "images": [],
+    "sku": "LL-17124"
   },
   {
     "id": "cotton-pad-ear-buds-holder",
@@ -176,7 +204,8 @@
     "instagramLink": "https://www.instagram.com/reel/DZiOEBRsSr1/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     "youtubeLink": "",
     "active": true,
-    "images": []
+    "images": [],
+    "sku": "LL-57560"
   },
   {
     "id": "makeup-sponge-case",
@@ -191,21 +220,23 @@
     "images": [
       "images/makeup-sponge-case-1781373072303-1.jpg",
       "images/makeup-sponge-case-1781373072340-2.jpg"
-    ]
+    ],
+    "sku": "LL-88001"
   },
   {
     "id": "vanity-organizer",
     "name": "Vanity Organizer",
     "description": "Declutter your vanity with this stylish, multi-functional Makeup Organizer. Designed with a thoughtful, compartmentalized layout, it provides dedicated space for everything from makeup brushes and lipsticks to skincare bottles and compacts. Its chic pink finish and ribbed texture bring a modern, organized aesthetic to your space, ensuring your essential products are always tidy, protected, and right at your fingertips.",
     "category": "Vanity Essentials",
-    "price": "₹399",
-    "whatsappMessage": "Hi! I'm interested in ordering: Vanity Organizer (399)",
+    "price": "₹449",
+    "whatsappMessage": "Hi! I'm interested in ordering: Vanity Organizer (₹449)",
     "instagramLink": "https://www.instagram.com/reel/DZjpyhshTO-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     "youtubeLink": "",
     "active": true,
     "images": [
       "images/vanity-organizer-1781372706926-3.jpg"
-    ]
+    ],
+    "sku": "LL-18436"
   },
   {
     "id": "hair-scrunchy-holder-stand",
@@ -218,7 +249,8 @@
     "active": true,
     "images": [
       "images/hair-scrunchy-holder-stand-1781371406192-1.jpg"
-    ]
+    ],
+    "sku": "LL-41290"
   },
   {
     "id": "compact-makeup-brush-cleaner-plate",
@@ -234,6 +266,7 @@
       "images/compact-makeup-brush-cleaner-plate-1781367106391-1.jpg",
       "images/compact-makeup-brush-cleaner-plate-1781367106414-2.jpg",
       "images/compact-makeup-brush-cleaner-plate-1781367106433-3.jpg"
-    ]
+    ],
+    "sku": "LL-52222"
   }
 ]

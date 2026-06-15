@@ -36,7 +36,26 @@ async function ensureDir(dirPath) {
 async function readProducts() {
   try {
     const data = await fs.readFile(PRODUCTS_FILE, 'utf8');
-    return JSON.parse(data);
+    const products = JSON.parse(data);
+    
+    // Auto-backfill SKUs if any product is missing one
+    let modified = false;
+    products.forEach(p => {
+      if (!p.sku) {
+        let sku = 'LL-' + Math.floor(10000 + Math.random() * 90000);
+        while (products.some(other => other.sku === sku)) {
+          sku = 'LL-' + Math.floor(10000 + Math.random() * 90000);
+        }
+        p.sku = sku;
+        modified = true;
+      }
+    });
+    
+    if (modified) {
+      await fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 2), 'utf8');
+    }
+    
+    return products;
   } catch (error) {
     // If file doesn't exist or is empty, return empty array
     return [];
@@ -195,10 +214,11 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
     const newImagePaths = [];
     
     if (req.files && req.files.length > 0) {
+      const cleanTitle = generateSlug(name);
       for (let i = 0; i < req.files.length; i++) {
         const file = req.files[i];
-        const timestamp = Date.now();
-        const filename = `${productId}-${timestamp}-${i + 1}.jpg`;
+        const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
+        const filename = `${cleanTitle}-${randomSuffix}-${i + 1}.jpg`;
         const filePath = path.join(IMAGES_DIR, filename);
         
         await sharp(file.buffer)
@@ -232,6 +252,11 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
     }
 
     if (isNew) {
+      let sku = 'LL-' + Math.floor(10000 + Math.random() * 90000);
+      while (products.some(other => other.sku === sku)) {
+        sku = 'LL-' + Math.floor(10000 + Math.random() * 90000);
+      }
+      productData.sku = sku;
       productData.images = newImagePaths;
       products.unshift(productData);
     } else {
@@ -243,6 +268,7 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
           // Keep existing images if no new ones are uploaded
           productData.images = newImagePaths.length > 0 ? newImagePaths : products[index].images;
         }
+        productData.sku = products[index].sku || ('LL-' + Math.floor(10000 + Math.random() * 90000));
         products[index] = productData;
       }
     }

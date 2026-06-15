@@ -2,6 +2,16 @@ const API_URL = 'http://localhost:3000/api/products';
 let allProducts = [];
 let currentImagesToKeep = [];
 
+function escapeHTML(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // DOM Elements
 const form = document.getElementById('product-form');
 const formTitle = document.getElementById('form-title');
@@ -82,6 +92,12 @@ window.resetForm = function() {
   document.getElementById('existing-images-container').style.display = 'none';
   document.getElementById('existing-images-preview').innerHTML = '';
   document.getElementById('new-images-container').style.display = 'none';
+  
+  const displaySKU = document.getElementById('form-sku-display');
+  if (displaySKU) {
+    displaySKU.style.display = 'none';
+    displaySKU.textContent = '';
+  }
 };
 
 // Load products
@@ -89,7 +105,7 @@ async function loadProducts() {
   try {
     const res = await fetch(API_URL);
     allProducts = await res.json();
-    renderProductList();
+    filterProducts(); // Handles rendering with active search/filter settings
     populateCategoryDatalist();
   } catch (error) {
     console.error('Failed to load products', error);
@@ -104,15 +120,15 @@ function populateCategoryDatalist() {
 }
 
 // Render product list
-function renderProductList() {
+window.renderProductList = function(products = allProducts) {
   productList.innerHTML = '';
   
-  if (allProducts.length === 0) {
-    productList.innerHTML = '<p style="color: #6b7280; text-align: center; padding: 2rem;">No products found. Add one above!</p>';
+  if (products.length === 0) {
+    productList.innerHTML = '<p style="color: #6b7280; text-align: center; padding: 2rem;">No products found.</p>';
     return;
   }
   
-  allProducts.forEach(product => {
+  products.forEach(product => {
     const item = document.createElement('div');
     item.className = 'product-item';
     
@@ -122,26 +138,75 @@ function renderProductList() {
       : 'https://via.placeholder.com/60';
       
     item.innerHTML = `
-      <img src="${imgSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/60'">
+      <img src="${imgSrc}" alt="${escapeHTML(product.name)}" onerror="this.src='https://via.placeholder.com/60'">
       <div class="product-details">
-        <h3>${product.name}</h3>
-        <p>${product.price && product.price.toString().startsWith('₹') ? product.price : '₹' + product.price}</p>
-        <div style="margin-top:0.5rem;display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+        <h3>${escapeHTML(product.name)}</h3>
+        <p style="font-weight: 600;">${product.price && product.price.toString().startsWith('₹') ? escapeHTML(product.price.toString()) : '₹' + escapeHTML((product.price || '').toString())}</p>
+        <div style="margin-top:0.4rem;display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
           <span class="badge ${product.active ? '' : 'inactive'}">${product.active ? 'Active' : 'Inactive'}</span>
-          ${product.category ? `<span class="badge" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;">${product.category}</span>` : ''}
+          ${product.sku ? `<span class="badge" style="background:#e0e7ff;color:#4338ca;border:1px solid #c7d2fe;">SKU: ${escapeHTML(product.sku)}</span>` : ''}
+          ${product.category ? `<span class="badge" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;">${escapeHTML(product.category)}</span>` : ''}
         </div>
       </div>
       <div class="product-actions">
-        <a href="../products/${product.id}/" target="_blank" class="btn btn-sm" style="background: #10b981; text-decoration: none; text-align: center;">View</a>
-        <button class="btn btn-sm" onclick="editProduct('${product.id}')">Edit</button>
-        <button class="btn btn-sm" style="background: #6b7280;" onclick="toggleActive('${product.id}')">Toggle</button>
-        <button class="btn btn-sm btn-danger" onclick="deleteProduct('${product.id}')">Delete</button>
+        <a href="../products/${escapeHTML(product.id)}/" target="_blank" class="btn btn-sm" style="background: #10b981; text-decoration: none; text-align: center;">View</a>
+        <button class="btn btn-sm" onclick="editProduct('${escapeHTML(product.id)}')">Edit</button>
+        <button class="btn btn-sm" style="background: #6b7280;" onclick="toggleActive('${escapeHTML(product.id)}')">Toggle</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteProduct('${escapeHTML(product.id)}')">Delete</button>
       </div>
     `;
     
     productList.appendChild(item);
   });
-}
+};
+
+// Search & Filter products
+window.filterProducts = function() {
+  const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+  const statusFilter = document.getElementById('status-filter').value;
+  const sortFilter = document.getElementById('sort-filter').value;
+  
+  let products = [...allProducts];
+  
+  // 1. Text Search (name, category, description, SKU, ID)
+  if (searchQuery) {
+    products = products.filter(p => {
+      const name = (p.name || '').toLowerCase();
+      const cat = (p.category || '').toLowerCase();
+      const desc = (p.description || '').toLowerCase();
+      const sku = (p.sku || '').toLowerCase();
+      const id = (p.id || '').toLowerCase();
+      
+      return name.includes(searchQuery) || 
+             cat.includes(searchQuery) || 
+             desc.includes(searchQuery) || 
+             sku.includes(searchQuery) ||
+             id.includes(searchQuery);
+    });
+  }
+  
+  // 2. Status Filter
+  if (statusFilter !== 'all') {
+    const wantActive = statusFilter === 'active';
+    products = products.filter(p => p.active === wantActive);
+  }
+  
+  // 3. Price Sorting
+  if (sortFilter !== 'none') {
+    products.sort((a, b) => {
+      const priceA = parseFloat((a.price || '').toString().replace(/[^0-9.]/g, '')) || 0;
+      const priceB = parseFloat((b.price || '').toString().replace(/[^0-9.]/g, '')) || 0;
+      
+      if (sortFilter === 'low-high') {
+        return priceA - priceB;
+      } else {
+        return priceB - priceA;
+      }
+    });
+  }
+  
+  renderProductList(products);
+};
 
 // Submit form
 form.addEventListener('submit', async (e) => {
@@ -202,6 +267,14 @@ window.editProduct = function(id) {
   formTitle.textContent = 'Edit Product';
   productIdInput.value = product.id;
   nameInput.value = product.name;
+  
+  const displaySKU = document.getElementById('form-sku-display');
+  if (displaySKU && product.sku) {
+    displaySKU.textContent = `SKU: ${product.sku}`;
+    displaySKU.style.display = 'block';
+  } else if (displaySKU) {
+    displaySKU.style.display = 'none';
+  }
   priceInput.value = product.price;
   descInput.value = product.description;
   categoryInput.value = product.category || '';

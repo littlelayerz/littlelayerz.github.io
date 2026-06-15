@@ -334,6 +334,7 @@ function renderSingleProduct(product, container) {
       ${mediaHtml}
       <div class="single-product-details">
         ${product.category ? `<div class="single-category-tag">${emoji} ${product.category}</div>` : ''}
+        ${product.sku ? `<div style="font-size: 13px; color: var(--muted); margin-bottom: 12px; font-weight: 500; letter-spacing: 0.5px;">SKU: ${product.sku}</div>` : ''}
         <h1 class="single-title">${product.name}</h1>
         <div class="single-price">${formatPrice(product.price)}</div>
         <p class="single-desc">${product.description}</p>
