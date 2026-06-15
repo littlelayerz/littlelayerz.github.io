@@ -32,6 +32,15 @@ async function run() {
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MRG2TT80EL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MRG2TT80EL');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${product.name} | Little Layerz</title>
@@ -77,15 +86,6 @@ async function run() {
   <link rel="stylesheet" href="../../style.css">
   <script>window.PRODUCT_SLUG = "${product.id}";</script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MRG2TT80EL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-MRG2TT80EL');
-  </script>
 </head>
 <body>
   <header>
