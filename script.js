@@ -5,10 +5,16 @@ const PHONE_NUMBER = "917831899586";
 const INSTAGRAM_USERNAME = "littlelayerz";
 const RECENTLY_VIEWED_KEY = "ll_recently_viewed";
 const RECENTLY_VIEWED_MAX = 4;
+const SHOPPING_CART_KEY = "ll_shopping_cart";
 
 const formatPrice = (price) => {
   const p = price ? price.toString().trim() : '';
   return p.startsWith('₹') ? p : `₹${p}`;
+};
+
+const getPriceNumber = (priceStr) => {
+  if (!priceStr) return 0;
+  return parseInt(priceStr.replace(/[^0-9]/g, '')) || 0;
 };
 
 // Category → emoji mapping
@@ -55,6 +61,188 @@ function addRecentlyViewed(productId) {
 }
 
 // =====================
+// SHOPPING BAG (CART) STATE & FUNCTIONS
+// =====================
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem(SHOPPING_CART_KEY)) || [];
+  } catch { return []; }
+}
+
+function saveCart(cart) {
+  localStorage.setItem(SHOPPING_CART_KEY, JSON.stringify(cart));
+  updateCartUI();
+}
+
+window.toggleCart = function() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-overlay');
+  if (drawer && overlay) {
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+};
+
+window.addToCart = function(productId) {
+  const product = allProducts.find(p => p.id === productId);
+  if (!product) return;
+
+  const cart = getCart();
+  const existing = cart.find(item => item.id === productId);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    const imgSrc = product.images && product.images.length > 0 ? product.images[0] : '';
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      sku: product.sku || '',
+      image: imgSrc,
+      qty: 1
+    });
+  }
+
+  saveCart(cart);
+
+  // Animate adding feedback by opening cart drawer
+  const drawer = document.getElementById('cart-drawer');
+  if (drawer && !drawer.classList.contains('open')) {
+    toggleCart();
+  }
+};
+
+window.removeFromCart = function(productId) {
+  const cart = getCart().filter(item => item.id !== productId);
+  saveCart(cart);
+};
+
+window.updateCartQty = function(productId, delta) {
+  let cart = getCart();
+  const item = cart.find(item => item.id === productId);
+  if (item) {
+    item.qty += delta;
+    if (item.qty <= 0) {
+      cart = cart.filter(i => i.id !== productId);
+    }
+  }
+  saveCart(cart);
+};
+
+function updateCartUI() {
+  const cart = getCart();
+  const badge = document.getElementById('cart-badge-count');
+  const drawerCount = document.getElementById('cart-drawer-count');
+  const itemsContainer = document.getElementById('cart-items');
+  const subtotalEl = document.getElementById('cart-subtotal');
+
+  // Update badge in header
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  if (badge) {
+    badge.textContent = totalQty;
+    badge.style.display = totalQty > 0 ? 'flex' : 'none';
+  }
+
+  // Update drawer count heading
+  if (drawerCount) {
+    drawerCount.textContent = totalQty;
+  }
+
+  // Populate drawer items
+  if (itemsContainer) {
+    if (cart.length === 0) {
+      itemsContainer.innerHTML = `
+        <div class="cart-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <p>Your Shopping Bag is empty.</p>
+          <button class="hero-cta-btn" onclick="toggleCart()" style="align-self:center;margin-top:0;">Continue Browsing</button>
+        </div>`;
+    } else {
+      itemsContainer.innerHTML = cart.map(item => {
+        const itemImg = item.image ? getAssetPath(item.image) : 'https://via.placeholder.com/64?text=No+Image';
+        return `
+          <div class="cart-item">
+            <img src="${itemImg}" alt="${item.name}" class="cart-item-img">
+            <div class="cart-item-info">
+              <span class="cart-item-name" title="${item.name}">${item.name}</span>
+              <span class="cart-item-price">${formatPrice(item.price)}</span>
+              <div class="cart-item-actions">
+                <button class="qty-btn" onclick="updateCartQty('${item.id}', -1)">−</button>
+                <span class="qty-val">${item.qty}</span>
+                <button class="qty-btn" onclick="updateCartQty('${item.id}', 1)">+</button>
+              </div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" aria-label="Remove item">
+              <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+            </button>
+          </div>`;
+      }).join('');
+    }
+  }
+
+  // Calculate and update subtotal
+  if (subtotalEl) {
+    const subtotal = cart.reduce((sum, item) => {
+      const priceVal = getPriceNumber(item.price);
+      return sum + (priceVal * item.qty);
+    }, 0);
+    subtotalEl.textContent = formatPrice(subtotal);
+  }
+}
+
+window.checkoutCart = function() {
+  const cart = getCart();
+  if (cart.length === 0) return;
+
+  let total = 0;
+  let itemsText = cart.map(item => {
+    const priceVal = getPriceNumber(item.price);
+    const sub = priceVal * item.qty;
+    total += sub;
+    return `• ${item.qty}x ${item.name} (${formatPrice(item.price)} each)${item.sku ? ` [SKU: ${item.sku}]` : ''}`;
+  }).join('\n');
+
+  const message = `Hi Little Layerz! I'd like to place an order for:\n\n${itemsText}\n\nTotal: ${formatPrice(total)}`;
+  const url = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+  
+  // Clear cart after checkout
+  localStorage.removeItem(SHOPPING_CART_KEY);
+  updateCartUI();
+  toggleCart();
+};
+
+// =====================
+// MOBILE SWIPE TOUCH EVENT HELPER
+// =====================
+function initSwipeGestures(productId, containerEl) {
+  if (!containerEl) return;
+  let startX = 0;
+  let startY = 0;
+
+  containerEl.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  containerEl.addEventListener('touchend', (e) => {
+    if (e.touches.length > 0) return;
+    const diffX = e.changedTouches[0].clientX - startX;
+    const diffY = e.changedTouches[0].clientY - startY;
+
+    // Check if horizontal swipe is dominant and significant
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        changeImage(null, productId, -1);
+      } else {
+        changeImage(null, productId, 1);
+      }
+    }
+  }, { passive: true });
+}
+
+// =====================
 // THUMBNAIL HELPER
 // =====================
 function getCardThumbnail(product) {
@@ -92,7 +280,6 @@ function buildCategoryStrip(products) {
 
 window.selectCategory = function(category) {
   activeCategory = category;
-  // Update pill states
   document.querySelectorAll('.category-pill').forEach(pill => {
     pill.classList.toggle('active', pill.dataset.category === category);
   });
@@ -118,17 +305,26 @@ async function loadProducts() {
     if (!res.ok) throw new Error('Failed to fetch products');
     allProducts = await res.json();
 
-    // Single product page via PRODUCT_SLUG
+    // Load initial cart UI
+    updateCartUI();
+
+    // Single product page via PRODUCT_SLUG (Pre-rendered via SSG)
     if (window.PRODUCT_SLUG) {
       const product = allProducts.find(p => p.id === window.PRODUCT_SLUG && p.active);
       if (product) {
         addRecentlyViewed(product.id);
-        renderSingleProduct(product, grid);
+        productCarousels[product.id] = { images: product.images || [], currentIndex: 0 };
+        
+        // Bind swipe gestures to pre-rendered image container
+        const container = document.querySelector('.single-view-image');
+        if (container && product.images && product.images.length > 1) {
+          initSwipeGestures(product.id, container);
+        }
         return;
       }
     }
 
-    // Legacy query param support
+    // Legacy query param support (renders dynamically on homepage shell)
     const params = new URLSearchParams(window.location.search);
     const productSlug = params.get('p');
     if (productSlug) {
@@ -264,21 +460,31 @@ function renderCatalog(products, container) {
           <p class="card-desc">${product.description}</p>
           <div class="card-actions" style="display:flex;flex-direction:row;gap:8px;margin-top:12px;">
             <a href="https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(waMsg)}" target="_blank" class="btn btn-whatsapp" style="flex:1;min-width:0;" onclick="event.stopPropagation()">
-              ${whatsappIcon} Order on WhatsApp
+              ${whatsappIcon} Order
             </a>
-            <button class="btn btn-share" style="flex-shrink:0;" onclick="shareProduct(event,'${product.id}')" aria-label="Share">${shareIcon}</button>
+            <button class="btn btn-add-bag btn-icon" style="flex-shrink:0;" onclick="event.stopPropagation(); addToCart('${product.id}')" aria-label="Add to Bag">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </button>
+            <button class="btn btn-share btn-icon" style="flex-shrink:0;" onclick="shareProduct(event,'${product.id}')" aria-label="Share">${shareIcon}</button>
           </div>
         </div>
       </div>`;
   }).join('');
 
-  // Attach click-to-navigate (only on non-button areas)
+  // Attach click-to-navigate and swipe touch interactions
   container.querySelectorAll('.product-card[data-id]').forEach(card => {
+    const productId = card.dataset.id;
     card.addEventListener('click', (e) => {
       if (!e.target.closest('.btn') && !e.target.closest('.carousel-btn')) {
-        navigateToProduct(card.dataset.id);
+        navigateToProduct(productId);
       }
     });
+
+    const imgContainer = card.querySelector('.card-image-container');
+    const state = productCarousels[productId];
+    if (imgContainer && state && state.images.length > 1) {
+      initSwipeGestures(productId, imgContainer);
+    }
   });
 
   setTimeout(() => {
@@ -287,12 +493,12 @@ function renderCatalog(products, container) {
 }
 
 // =====================
-// SINGLE PRODUCT RENDER
+// SINGLE PRODUCT RENDER (Legacy Query Param Fallback)
 // =====================
 function renderSingleProduct(product, container) {
-  document.getElementById('catalog-intro').style.display = 'none';
+  const catalogIntro = document.getElementById('catalog-intro');
+  if (catalogIntro) catalogIntro.style.display = 'none';
   
-  // Hide homepage features and about us on single product view
   const homeFeatures = document.getElementById('homepage-features');
   if (homeFeatures) homeFeatures.style.display = 'none';
   const aboutUs = document.getElementById('about-us');
@@ -330,6 +536,8 @@ function renderSingleProduct(product, container) {
       </div>`;
   }
 
+  const cleanDesc = product.description ? product.description.replace(/\r?\n/g, '<br>') : '';
+
   container.innerHTML = `
     <div class="back-nav">
       <a href="${window.PRODUCT_SLUG ? '../../' : './'}" class="back-link">
@@ -344,9 +552,12 @@ function renderSingleProduct(product, container) {
         ${product.sku ? `<div style="font-size: 13px; color: var(--muted); margin-bottom: 12px; font-weight: 500; letter-spacing: 0.5px;">SKU: ${product.sku}</div>` : ''}
         <h1 class="single-title">${product.name}</h1>
         <div class="single-price">${formatPrice(product.price)}</div>
-        <p class="single-desc">${product.description}</p>
+        <p class="single-desc">${cleanDesc}</p>
         <div class="single-actions">
           <a href="${waLink}" target="_blank" class="btn btn-whatsapp">${whatsappIcon} Order on WhatsApp</a>
+          <button class="btn btn-add-bag" onclick="addToCart('${product.id}')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Shopping Bag
+          </button>
           ${product.instagramLink ? `<a href="${product.instagramLink}" target="_blank" class="btn btn-instagram">${instagramIcon} View on Instagram</a>` : ''}
           ${product.youtubeLink ? `<a href="${product.youtubeLink}" target="_blank" class="btn btn-youtube">${youtubeIcon} View on YouTube</a>` : ''}
           <button class="btn btn-share" onclick="shareProduct(event,'${product.id}')">${shareIcon} Share Link</button>
@@ -359,6 +570,12 @@ function renderSingleProduct(product, container) {
         <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:14px;box-shadow:rgba(0,0,0,0.04) 0 2px 6px;margin:0 auto;max-width:540px;min-width:326px;padding:0;width:100%;"></blockquote>
       </div>` : ''}
   `;
+
+  // Bind swipe touch interactions to image container
+  const imgContainer = container.querySelector('.single-view-image');
+  if (imgContainer && hasMultiple) {
+    initSwipeGestures(product.id, imgContainer);
+  }
 
   setTimeout(() => {
     if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
@@ -383,6 +600,7 @@ function navigateToProduct(productId) {
 window.changeImage = function(event, productId, direction) {
   if (event) event.stopPropagation();
   const state = productCarousels[productId];
+  if (!state || !state.images || state.images.length <= 1) return;
   state.currentIndex = (state.currentIndex + direction + state.images.length) % state.images.length;
 
   const imgEl = document.getElementById(`img-${productId}`);
@@ -430,7 +648,6 @@ window.openModal = function(event, productId) {
     modalImg.src = getAssetPath(modalImages[modalCurrentIndex]);
     modal.style.display = 'flex';
     
-    // Toggle prev/next buttons based on whether there are multiple images
     const prevBtn = modal.querySelector('.modal-prev');
     const nextBtn = modal.querySelector('.modal-next');
     if (prevBtn && nextBtn) {
@@ -517,11 +734,40 @@ function resetHeroTimer() {
 }
 
 // =====================
+// CART SWIPE TO CLOSE GESTURE
+// =====================
+function initCartSwipeGesture() {
+  const drawer = document.getElementById('cart-drawer');
+  if (!drawer) return;
+  let startX = 0;
+  let startY = 0;
+
+  drawer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  drawer.addEventListener('touchend', (e) => {
+    if (e.touches.length > 0) return;
+    const diffX = e.changedTouches[0].clientX - startX;
+    const diffY = e.changedTouches[0].clientY - startY;
+
+    // Swipe right (from left to right) inside the drawer to close it
+    if (Math.abs(diffX) > Math.abs(diffY) && diffX > 60) {
+      if (drawer.classList.contains('open')) {
+        toggleCart();
+      }
+    }
+  }, { passive: true });
+}
+
+// =====================
 // INIT
 // =====================
 document.getElementById('year').textContent = new Date().getFullYear();
 document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
+  initCartSwipeGesture();
   if (document.getElementById('hero-carousel')) {
     startHeroTimer();
   }
