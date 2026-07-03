@@ -98,13 +98,23 @@
       </div>
       <div class="single-product-layout">
         
-        <div class="card-image-container single-view-image">
-          <img src="../../images/lip-balm-holder-key-chain-1781442976619-1.jpg" alt="Lip Balm Holder Key Chain" class="card-image" id="img-lip-balm-holder-key-chain">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-lip-balm-holder-key-chain">
+            
+              <img src="../../images/lip-balm-holder-key-chain-1781442976619-1.jpg" alt="Lip Balm Holder Key Chain - view 1" class="single-view-img-item" onclick="openModal(event, 'lip-balm-holder-key-chain', 0)">
+            
+              <img src="../../images/lip-balm-holder-key-chain-1781442976657-2.jpg" alt="Lip Balm Holder Key Chain - view 2" class="single-view-img-item" onclick="openModal(event, 'lip-balm-holder-key-chain', 1)">
+            
+              <img src="../../images/lip-balm-holder-key-chain-1781442976682-3.jpg" alt="Lip Balm Holder Key Chain - view 3" class="single-view-img-item" onclick="openModal(event, 'lip-balm-holder-key-chain', 2)">
+            
+              <img src="../../images/lip-balm-holder-key-chain-1781442976699-4.jpg" alt="Lip Balm Holder Key Chain - view 4" class="single-view-img-item" onclick="openModal(event, 'lip-balm-holder-key-chain', 3)">
+            
+          </div>
           
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'lip-balm-holder-key-chain',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'lip-balm-holder-key-chain',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('lip-balm-holder-key-chain', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('lip-balm-holder-key-chain', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-lip-balm-holder-key-chain">
-              <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot active" onclick="setSingleImage('lip-balm-holder-key-chain', 0)"></div><div class="dot" onclick="setSingleImage('lip-balm-holder-key-chain', 1)"></div><div class="dot" onclick="setSingleImage('lip-balm-holder-key-chain', 2)"></div><div class="dot" onclick="setSingleImage('lip-balm-holder-key-chain', 3)"></div>
             </div>
         </div>
         <div class="single-product-details">

@@ -98,13 +98,19 @@
       </div>
       <div class="single-product-layout">
         
-        <div class="card-image-container single-view-image">
-          <img src="../../images/heart-shaped-desk-organizer-stationery-holder-1781436577678-1.jpg" alt="Heart-Shaped Desk Organizer & Stationery Holder" class="card-image" id="img-heart-shaped-desk-organizer-stationery-holder">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-heart-shaped-desk-organizer-stationery-holder">
+            
+              <img src="../../images/heart-shaped-desk-organizer-stationery-holder-1781436577678-1.jpg" alt="Heart-Shaped Desk Organizer & Stationery Holder - view 1" class="single-view-img-item" onclick="openModal(event, 'heart-shaped-desk-organizer-stationery-holder', 0)">
+            
+              <img src="../../images/heart-shaped-desk-organizer-stationery-holder-1781436577717-2.jpg" alt="Heart-Shaped Desk Organizer & Stationery Holder - view 2" class="single-view-img-item" onclick="openModal(event, 'heart-shaped-desk-organizer-stationery-holder', 1)">
+            
+          </div>
           
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'heart-shaped-desk-organizer-stationery-holder',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'heart-shaped-desk-organizer-stationery-holder',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('heart-shaped-desk-organizer-stationery-holder', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('heart-shaped-desk-organizer-stationery-holder', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-heart-shaped-desk-organizer-stationery-holder">
-              <div class="dot active"></div><div class="dot"></div>
+              <div class="dot active" onclick="setSingleImage('heart-shaped-desk-organizer-stationery-holder', 0)"></div><div class="dot" onclick="setSingleImage('heart-shaped-desk-organizer-stationery-holder', 1)"></div>
             </div>
         </div>
         <div class="single-product-details">

@@ -1,7 +1,7 @@
 // =====================
 // CONFIG
 // =====================
-const PHONE_NUMBER = "917831899586";
+const PHONE_NUMBER = "918796837718";
 const INSTAGRAM_USERNAME = "littlelayerz";
 const RECENTLY_VIEWED_KEY = "ll_recently_viewed";
 const RECENTLY_VIEWED_MAX = 4;
@@ -314,12 +314,7 @@ async function loadProducts() {
       if (product) {
         addRecentlyViewed(product.id);
         productCarousels[product.id] = { images: product.images || [], currentIndex: 0 };
-        
-        // Bind swipe gestures to pre-rendered image container
-        const container = document.querySelector('.single-view-image');
-        if (container && product.images && product.images.length > 1) {
-          initSwipeGestures(product.id, container);
-        }
+        initSingleProductGallery(product.id);
         return;
       }
     }
@@ -419,6 +414,7 @@ function renderCatalog(products, container) {
     const hasMultiple = hasImages && product.images.length > 1;
     const emoji = CATEGORY_ICONS[product.category] || DEFAULT_EMOJI;
     const waMsg = product.whatsappMessage || `Hi, I'd like to order: ${product.name} (${formatPrice(product.price)})`;
+    const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(waMsg)}`;
 
     let photoHtml;
     if (hasImages) {
@@ -432,6 +428,9 @@ function renderCatalog(products, container) {
             <div class="carousel-dots" id="dots-${product.id}">
               ${product.images.map((_, i) => `<div class="dot${i === 0 ? ' active' : ''}"></div>`).join('')}
             </div>` : ''}
+          <a href="${waUrl}" target="_blank" class="card-quick-order" onclick="event.stopPropagation()">
+            ${whatsappIcon} Quick Order
+          </a>
         </div>`;
     } else if (product.instagramLink) {
       photoHtml = `
@@ -440,6 +439,9 @@ function renderCatalog(products, container) {
           <div style="width:100%;margin-top:-56px;">
             <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF;border:0;margin:0 auto;padding:0;width:100%;max-width:100%;"></blockquote>
           </div>
+          <a href="${waUrl}" target="_blank" class="card-quick-order" onclick="event.stopPropagation()">
+            ${whatsappIcon} Quick Order
+          </a>
         </div>`;
     } else {
       photoHtml = `
@@ -458,8 +460,8 @@ function renderCatalog(products, container) {
             <span class="card-price">${formatPrice(product.price)}</span>
           </div>
           <p class="card-desc">${product.description}</p>
-          <div class="card-actions" style="display:flex;flex-direction:row;gap:8px;margin-top:12px;">
-            <a href="https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(waMsg)}" target="_blank" class="btn btn-whatsapp" style="flex:1;min-width:0;" onclick="event.stopPropagation()">
+          <div class="card-actions">
+            <a href="${waUrl}" target="_blank" class="btn btn-whatsapp" style="flex:1;min-width:0;" onclick="event.stopPropagation()">
               ${whatsappIcon} Order
             </a>
             <button class="btn btn-add-bag btn-icon" style="flex-shrink:0;" onclick="event.stopPropagation(); addToCart('${product.id}')" aria-label="Add to Bag">
@@ -475,7 +477,7 @@ function renderCatalog(products, container) {
   container.querySelectorAll('.product-card[data-id]').forEach(card => {
     const productId = card.dataset.id;
     card.addEventListener('click', (e) => {
-      if (!e.target.closest('.btn') && !e.target.closest('.carousel-btn')) {
+      if (!e.target.closest('.btn') && !e.target.closest('.carousel-btn') && !e.target.closest('.card-quick-order')) {
         navigateToProduct(productId);
       }
     });
@@ -515,24 +517,30 @@ function renderSingleProduct(product, container) {
   let mediaHtml;
   if (hasImages) {
     mediaHtml = `
-      <div class="card-image-container single-view-image">
-        <img src="${getAssetPath(product.images[0])}" alt="${product.name}" class="card-image" id="img-${product.id}" onclick="openModal(event, '${product.id}')">
+      <div class="single-product-media">
+        <div class="single-product-images-grid" id="grid-${product.id}">
+          ${product.images.map((img, i) => `
+            <img src="${getAssetPath(img)}" alt="${product.name} - view ${i + 1}" class="single-view-img-item" onclick="openModal(event, '${product.id}', ${i})">
+          `).join('')}
+        </div>
         ${hasMultiple ? `
-          <button class="carousel-btn carousel-prev" onclick="changeImage(event,'${product.id}',-1)" aria-label="Previous">❮</button>
-          <button class="carousel-btn carousel-next" onclick="changeImage(event,'${product.id}',1)" aria-label="Next">❯</button>
+          <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('${product.id}', -1)" aria-label="Previous">❮</button>
+          <button class="carousel-btn carousel-next" onclick="scrollSingleImage('${product.id}', 1)" aria-label="Next">❯</button>
           <div class="carousel-dots" id="dots-${product.id}">
-            ${product.images.map((_, i) => `<div class="dot${i === 0 ? ' active' : ''}"></div>`).join('')}
+            ${product.images.map((_, i) => `<div class="dot${i === 0 ? ' active' : ''}" onclick="setSingleImage('${product.id}', ${i})"></div>`).join('')}
           </div>` : ''}
       </div>`;
   } else if (product.instagramLink) {
     mediaHtml = `
-      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px, rgba(0,0,0,0.1) 0 4px 8px;display:flex;justify-content:center;">
+      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px, rgba(0,0,0,0.1) 0 4px 8px;display:flex;justify-content:center;width:100%;">
         <blockquote class="instagram-media" data-instgrm-permalink="${product.instagramLink}" data-instgrm-version="14" style="background:#FFF;border:0;margin:0;padding:0;width:100%;max-width:540px;"></blockquote>
       </div>`;
   } else {
     mediaHtml = `
-      <div class="card-image-container single-view-image">
-        <img src="https://via.placeholder.com/540x540/f7f7f7/929292?text=No+Image" alt="${product.name}" class="card-image">
+      <div class="single-product-media">
+        <div class="single-product-images-grid">
+          <img src="https://via.placeholder.com/540x540/f7f7f7/929292?text=No+Image" alt="${product.name}" class="single-view-img-item">
+        </div>
       </div>`;
   }
 
@@ -571,11 +579,7 @@ function renderSingleProduct(product, container) {
       </div>` : ''}
   `;
 
-  // Bind swipe touch interactions to image container
-  const imgContainer = container.querySelector('.single-view-image');
-  if (imgContainer && hasMultiple) {
-    initSwipeGestures(product.id, imgContainer);
-  }
+  initSingleProductGallery(product.id);
 
   setTimeout(() => {
     if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
@@ -629,18 +633,51 @@ window.shareProduct = function(event, productId) {
 };
 
 // =====================
+// SINGLE PRODUCT SCROLL HELPERS (Mobile / Desktop Grid)
+// =====================
+window.scrollSingleImage = function(productId, direction) {
+  const grid = document.getElementById(`grid-${productId}`);
+  if (!grid) return;
+  const width = grid.clientWidth;
+  grid.scrollBy({ left: direction * width, behavior: 'smooth' });
+};
+
+window.setSingleImage = function(productId, index) {
+  const grid = document.getElementById(`grid-${productId}`);
+  if (!grid) return;
+  const width = grid.clientWidth;
+  grid.scrollTo({ left: index * width, behavior: 'smooth' });
+};
+
+window.initSingleProductGallery = function(productId) {
+  const grid = document.getElementById(`grid-${productId}`);
+  if (!grid) return;
+  grid.addEventListener('scroll', () => {
+    const width = grid.clientWidth;
+    if (width <= 0) return;
+    const index = Math.round(grid.scrollLeft / width);
+    const dotsContainer = document.getElementById(`dots-${productId}`);
+    if (dotsContainer) {
+      dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+  });
+};
+
+// =====================
 // MODAL
 // =====================
 let modalImages = [];
 let modalCurrentIndex = 0;
 
-window.openModal = function(event, productId) {
+window.openModal = function(event, productId, index = 0) {
   if (event) event.stopPropagation();
   const state = productCarousels[productId];
   if (!state || !state.images || state.images.length === 0) return;
   
   modalImages = state.images;
-  modalCurrentIndex = state.currentIndex;
+  modalCurrentIndex = (typeof index === 'number') ? index : (state.currentIndex || 0);
   
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-img');
@@ -762,12 +799,57 @@ function initCartSwipeGesture() {
 }
 
 // =====================
+// 3D CARD TILT EFFECT (desktop only)
+// =====================
+function initCardTiltEffects() {
+  // Skip on touch/mobile devices
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  document.addEventListener('mousemove', (e) => {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const isNear = (
+        e.clientX > rect.left - 60 &&
+        e.clientX < rect.right + 60 &&
+        e.clientY > rect.top - 60 &&
+        e.clientY < rect.bottom + 60
+      );
+
+      if (!isNear) {
+        card.style.transform = '';
+        return;
+      }
+
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+
+      const tiltX = dy * -5;   // max 5deg vertical tilt
+      const tiltY = dx * 6;    // max 6deg horizontal tilt
+
+      card.style.transform = `translateY(-6px) scale(1.015) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      card.style.transition = 'transform 0.08s ease, box-shadow 0.35s ease';
+    });
+  });
+
+  document.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease';
+    });
+  });
+}
+
+// =====================
 // INIT
 // =====================
 document.getElementById('year').textContent = new Date().getFullYear();
 document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
   initCartSwipeGesture();
+  initCardTiltEffects();
   if (document.getElementById('hero-carousel')) {
     startHeroTimer();
   }

@@ -98,13 +98,19 @@
       </div>
       <div class="single-product-layout">
         
-        <div class="card-image-container single-view-image">
-          <img src="../../images/tissue-holder-1781436351782-1.jpg" alt="Elegant Ribbed Tissue Holder" class="card-image" id="img-tissue-holder">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-tissue-holder">
+            
+              <img src="../../images/tissue-holder-1781436351782-1.jpg" alt="Elegant Ribbed Tissue Holder - view 1" class="single-view-img-item" onclick="openModal(event, 'tissue-holder', 0)">
+            
+              <img src="../../images/tissue-holder-1781436351819-2.jpg" alt="Elegant Ribbed Tissue Holder - view 2" class="single-view-img-item" onclick="openModal(event, 'tissue-holder', 1)">
+            
+          </div>
           
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'tissue-holder',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'tissue-holder',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('tissue-holder', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('tissue-holder', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-tissue-holder">
-              <div class="dot active"></div><div class="dot"></div>
+              <div class="dot active" onclick="setSingleImage('tissue-holder', 0)"></div><div class="dot" onclick="setSingleImage('tissue-holder', 1)"></div>
             </div>
         </div>
         <div class="single-product-details">

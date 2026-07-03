@@ -98,13 +98,21 @@
       </div>
       <div class="single-product-layout">
         
-        <div class="card-image-container single-view-image">
-          <img src="../../images/travel-toothbrush-holder-compact-hygienic-1781453358435-1.jpg" alt="Travel Toothbrush Holder – Compact & Hygienic" class="card-image" id="img-travel-toothbrush-holder-compact-hygienic">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-travel-toothbrush-holder-compact-hygienic">
+            
+              <img src="../../images/travel-toothbrush-holder-compact-hygienic-1781453358435-1.jpg" alt="Travel Toothbrush Holder – Compact & Hygienic - view 1" class="single-view-img-item" onclick="openModal(event, 'travel-toothbrush-holder-compact-hygienic', 0)">
+            
+              <img src="../../images/travel-toothbrush-holder-compact-hygienic-1781453358473-2.jpg" alt="Travel Toothbrush Holder – Compact & Hygienic - view 2" class="single-view-img-item" onclick="openModal(event, 'travel-toothbrush-holder-compact-hygienic', 1)">
+            
+              <img src="../../images/travel-toothbrush-holder-compact-hygienic-1781453358497-3.jpg" alt="Travel Toothbrush Holder – Compact & Hygienic - view 3" class="single-view-img-item" onclick="openModal(event, 'travel-toothbrush-holder-compact-hygienic', 2)">
+            
+          </div>
           
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'travel-toothbrush-holder-compact-hygienic',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'travel-toothbrush-holder-compact-hygienic',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('travel-toothbrush-holder-compact-hygienic', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('travel-toothbrush-holder-compact-hygienic', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-travel-toothbrush-holder-compact-hygienic">
-              <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot active" onclick="setSingleImage('travel-toothbrush-holder-compact-hygienic', 0)"></div><div class="dot" onclick="setSingleImage('travel-toothbrush-holder-compact-hygienic', 1)"></div><div class="dot" onclick="setSingleImage('travel-toothbrush-holder-compact-hygienic', 2)"></div>
             </div>
         </div>
         <div class="single-product-details">

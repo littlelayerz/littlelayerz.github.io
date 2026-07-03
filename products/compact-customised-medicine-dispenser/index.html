@@ -98,13 +98,23 @@
       </div>
       <div class="single-product-layout">
         
-        <div class="card-image-container single-view-image">
-          <img src="../../images/compact-customised-medicine-dispenser-1781530936609-1.jpg" alt="Compact Customised Medicine Dispenser" class="card-image" id="img-compact-customised-medicine-dispenser">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-compact-customised-medicine-dispenser">
+            
+              <img src="../../images/compact-customised-medicine-dispenser-1781530936609-1.jpg" alt="Compact Customised Medicine Dispenser - view 1" class="single-view-img-item" onclick="openModal(event, 'compact-customised-medicine-dispenser', 0)">
+            
+              <img src="../../images/compact-customised-medicine-dispenser-1781530936669-2.jpg" alt="Compact Customised Medicine Dispenser - view 2" class="single-view-img-item" onclick="openModal(event, 'compact-customised-medicine-dispenser', 1)">
+            
+              <img src="../../images/compact-customised-medicine-dispenser-1781530936692-3.jpg" alt="Compact Customised Medicine Dispenser - view 3" class="single-view-img-item" onclick="openModal(event, 'compact-customised-medicine-dispenser', 2)">
+            
+              <img src="../../images/compact-customised-medicine-dispenser-1781530936711-4.jpg" alt="Compact Customised Medicine Dispenser - view 4" class="single-view-img-item" onclick="openModal(event, 'compact-customised-medicine-dispenser', 3)">
+            
+          </div>
           
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'compact-customised-medicine-dispenser',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'compact-customised-medicine-dispenser',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('compact-customised-medicine-dispenser', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('compact-customised-medicine-dispenser', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-compact-customised-medicine-dispenser">
-              <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot active" onclick="setSingleImage('compact-customised-medicine-dispenser', 0)"></div><div class="dot" onclick="setSingleImage('compact-customised-medicine-dispenser', 1)"></div><div class="dot" onclick="setSingleImage('compact-customised-medicine-dispenser', 2)"></div><div class="dot" onclick="setSingleImage('compact-customised-medicine-dispenser', 3)"></div>
             </div>
         </div>
         <div class="single-product-details">

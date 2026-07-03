@@ -98,13 +98,21 @@
       </div>
       <div class="single-product-layout">
         
-        <div class="card-image-container single-view-image">
-          <img src="../../images/travel-phone-stand-compact-and-durable-1781453308663-1.jpg" alt="Travel Phone stand - compact and durable" class="card-image" id="img-travel-phone-stand-compact-and-durable">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-travel-phone-stand-compact-and-durable">
+            
+              <img src="../../images/travel-phone-stand-compact-and-durable-1781453308663-1.jpg" alt="Travel Phone stand - compact and durable - view 1" class="single-view-img-item" onclick="openModal(event, 'travel-phone-stand-compact-and-durable', 0)">
+            
+              <img src="../../images/travel-phone-stand-compact-and-durable-1781453308705-2.jpg" alt="Travel Phone stand - compact and durable - view 2" class="single-view-img-item" onclick="openModal(event, 'travel-phone-stand-compact-and-durable', 1)">
+            
+              <img src="../../images/travel-phone-stand-compact-and-durable-1781453308731-3.jpg" alt="Travel Phone stand - compact and durable - view 3" class="single-view-img-item" onclick="openModal(event, 'travel-phone-stand-compact-and-durable', 2)">
+            
+          </div>
           
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'travel-phone-stand-compact-and-durable',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'travel-phone-stand-compact-and-durable',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('travel-phone-stand-compact-and-durable', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('travel-phone-stand-compact-and-durable', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-travel-phone-stand-compact-and-durable">
-              <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot active" onclick="setSingleImage('travel-phone-stand-compact-and-durable', 0)"></div><div class="dot" onclick="setSingleImage('travel-phone-stand-compact-and-durable', 1)"></div><div class="dot" onclick="setSingleImage('travel-phone-stand-compact-and-durable', 2)"></div>
             </div>
         </div>
         <div class="single-product-details">
