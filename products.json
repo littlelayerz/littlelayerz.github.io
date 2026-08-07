@@ -1,5 +1,52 @@
 [
   {
+    "id": "mandir-with-baal-hanuman",
+    "name": "Mandir with Baal Hanuman",
+    "description": "You can keep them in car or at home in Mandir",
+    "category": "Home Decor",
+    "price": "₹199",
+    "whatsappMessage": "Hi! I'm interested in ordering: Mandir with Baal Hanuman (₹199)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-23286",
+    "images": [
+      "images/mandir-with-baal-hanuman-CQY4Z-1.jpg",
+      "images/mandir-with-baal-hanuman-FSUUD-2.jpg",
+      "images/mandir-with-baal-hanuman-CWDLD-3.jpg"
+    ]
+  },
+  {
+    "id": "mobile-holder-travel-friendly",
+    "name": "Mobile Holder Travel Friendly",
+    "description": "Mobile Stand + Travel Can opener",
+    "category": "Travel",
+    "price": "₹180",
+    "whatsappMessage": "Hi! I'm interested in ordering: Mobile Holder Travel Friendly (₹180)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-69171",
+    "images": [
+      "images/mobile-holder-travel-friendly-13WU3-1.jpg"
+    ]
+  },
+  {
+    "id": "drum-keychain",
+    "name": "Drum Keychain",
+    "description": "Drum keychain different colors available",
+    "category": "",
+    "price": "₹85",
+    "whatsappMessage": "Hi! I'm interested in ordering: Drum Keychain (₹85)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-37866",
+    "images": [
+      "images/drum-keychain-0ZXES-1.jpg"
+    ]
+  },
+  {
     "id": "paw-keychain",
     "name": "Paw Keychain",
     "description": "Quantity: 1\r\n\r\nColors available of your choice",
@@ -194,23 +241,20 @@
   },
   {
     "id": "ganesha-with-mandir-choice-of-color-available",
-    "name": "Ganesha with Mandir  Choice of Color Available",
-    "description": "Available in your favorite color",
+    "name": "Ganesha with Mandir Choice of Color Available",
+    "description": "Available in your favourite colour.\r\n\r\nThis temple can be used as car dashboard or home mini mandir as well",
     "category": "",
     "price": "₹299",
-    "whatsappMessage": "Hi! I'm interested in ordering: Ganesha with Mandir  Choice of Color Available (₹299)",
+    "whatsappMessage": "Hi! I'm interested in ordering: Ganesha with Mandir Choice of Color Available (₹299)",
     "instagramLink": "",
     "youtubeLink": "",
     "active": true,
-    "sku": "LL-16396",
     "images": [
       "images/ganesha-with-mandir-choice-of-color-available-GMPP0-1.jpg",
       "images/ganesha-with-mandir-choice-of-color-available-AZEV3-2.jpg",
-      "images/ganesha-with-mandir-choice-of-color-available-F4DNG-3.jpg",
-      "images/ganesha-with-mandir-choice-of-color-available-M5J8O-4.jpg",
-      "images/ganesha-with-mandir-choice-of-color-available-SRJ0D-5.jpg",
-      "images/ganesha-with-mandir-choice-of-color-available-U7GZJ-6.jpg"
-    ]
+      "images/ganesha-with-mandir-choice-of-color-available-F4DNG-3.jpg"
+    ],
+    "sku": "LL-16396"
   },
   {
     "id": "smiley-storage-box",
@@ -305,16 +349,13 @@
     "name": "Lip Balm Holder Key Chain",
     "description": "Why worry now? Get the best of both worlds with a classy key chain that securely holds your daily-use lip balm. No more digging through your bag or worrying about the cap opening accidentally and creating a mess.",
     "category": "",
-    "price": "₹99",
-    "whatsappMessage": "Hi! I'm interested in ordering: Lip Balm Holder Key Chain (₹99)",
+    "price": "₹120",
+    "whatsappMessage": "Hi! I'm interested in ordering: Lip Balm Holder Key Chain (₹120)",
     "instagramLink": "",
     "youtubeLink": "",
     "active": true,
     "images": [
-      "images/lip-balm-holder-key-chain-1781442976619-1.jpg",
-      "images/lip-balm-holder-key-chain-1781442976657-2.jpg",
-      "images/lip-balm-holder-key-chain-1781442976682-3.jpg",
-      "images/lip-balm-holder-key-chain-1781442976699-4.jpg"
+      "images/lip-balm-holder-key-chain-MXIMK-1.jpg"
     ],
     "sku": "LL-29273"
   },
