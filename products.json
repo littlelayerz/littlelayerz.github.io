@@ -1,5 +1,20 @@
 [
   {
+    "id": "paw-keychain",
+    "name": "Paw Keychain",
+    "description": "Quantity: 1\r\n\r\nColors available of your choice",
+    "category": "Keychain",
+    "price": "₹90",
+    "whatsappMessage": "Hi! I'm interested in ordering: Paw Keychain (₹90)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-98853",
+    "images": [
+      "images/paw-keychain-O94BC-1.jpg"
+    ]
+  },
+  {
     "id": "name-letter-keychain-a-to-z-available",
     "name": "Name Letter Keychain A to Z Available",
     "description": "Available from A letter to Z letter of your choice",
