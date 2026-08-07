@@ -1,5 +1,222 @@
 [
   {
+    "id": "name-letter-keychain-a-to-z-available",
+    "name": "Name Letter Keychain A to Z Available",
+    "description": "Available from A letter to Z letter of your choice",
+    "category": "Keychain",
+    "price": "₹95",
+    "whatsappMessage": "Hi! I'm interested in ordering: Name Letter Keychain A to Z Available (₹95)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-42677",
+    "images": [
+      "images/name-letter-keychain-a-to-z-available-CJP6G-1.jpg",
+      "images/name-letter-keychain-a-to-z-available-7T3KE-2.jpg"
+    ]
+  },
+  {
+    "id": "tic-tac-toe-keychain-game",
+    "name": "Tic Tac Toe Keychain + Game",
+    "description": "Available in different colors",
+    "category": "Keychain",
+    "price": "₹120",
+    "whatsappMessage": "Hi! I'm interested in ordering: Tic Tac Toe Keychain + Game (₹120)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-58950",
+    "images": [
+      "images/tic-tac-toe-keychain-game-MDQUM-1.jpg"
+    ]
+  },
+  {
+    "id": "crayon-container",
+    "name": "Crayon Container",
+    "description": "Dimension: 100mm xx 54mm x 70mm\r\n\r\nAvailable in multiple colors",
+    "category": "Desk Organizer",
+    "price": "₹189",
+    "whatsappMessage": "Hi! I'm interested in ordering: Crayon Container (₹189)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-89571",
+    "images": [
+      "images/crayon-container-B839C-1.jpg"
+    ]
+  },
+  {
+    "id": "cute-bunny-keychain",
+    "name": "Cute Bunny Keychain",
+    "description": "Bunny keychain ",
+    "category": "Keychain",
+    "price": "₹80",
+    "whatsappMessage": "Hi! I'm interested in ordering: Cute Bunny Keychain (₹80)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "images": [
+      "images/cute-bunny-keychain-85ON5-1.jpg"
+    ],
+    "sku": "LL-17086"
+  },
+  {
+    "id": "cable-winder",
+    "name": "Cable Winder",
+    "description": "Organize your cables at one place and easy to carry",
+    "category": "Travel",
+    "price": "₹150",
+    "whatsappMessage": "Hi! I'm interested in ordering: Cable Winder (₹150)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-16349",
+    "images": [
+      "images/cable-winder-F4U3X-1.jpg",
+      "images/cable-winder-RBH9N-2.jpg",
+      "images/cable-winder-18PM4-3.jpg",
+      "images/cable-winder-TVIPM-4.jpg"
+    ]
+  },
+  {
+    "id": "magic-wizard-pencil-holder-stiftehalter-large",
+    "name": "Magic Wizard Pencil Holder / Stiftehalter - Large",
+    "description": "Dimension: 118mm x 119mm x 84mm\r\n",
+    "category": "",
+    "price": "₹350",
+    "whatsappMessage": "Hi! I'm interested in ordering: Magic Wizard Pencil Holder / Stiftehalter - Large (₹350)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-11042",
+    "images": [
+      "images/magic-wizard-pencil-holder-stiftehalter-large-Z78R4-1.jpg"
+    ]
+  },
+  {
+    "id": "magic-wizard-pencil-holder-stiftehalter-medium",
+    "name": "Magic Wizard Pencil Holder / Stiftehalter - Medium",
+    "description": "Dimension: 106mm x 107mm x 76mm",
+    "category": "",
+    "price": "₹240",
+    "whatsappMessage": "Hi! I'm interested in ordering: Magic Wizard Pencil Holder / Stiftehalter - Medium (₹240)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-41052",
+    "images": [
+      "images/magic-wizard-pencil-holder-stiftehalter-medium-845IW-1.jpg"
+    ]
+  },
+  {
+    "id": "pen-pencil-marker-holder",
+    "name": "Pen / Pencil / Marker Holder",
+    "description": "Available in Color of your Choice",
+    "category": "Desk Organizer",
+    "price": "₹499",
+    "whatsappMessage": "Hi! I'm interested in ordering: Pen / Pencil / Marker Holder (₹499)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-46130",
+    "images": [
+      "images/pen-pencil-marker-holder-TBCZ4-1.jpg",
+      "images/pen-pencil-marker-holder-8ERCX-2.jpg",
+      "images/pen-pencil-marker-holder-37LU7-3.jpg",
+      "images/pen-pencil-marker-holder-AW7IU-4.jpg",
+      "images/pen-pencil-marker-holder-LP1PI-5.jpg",
+      "images/pen-pencil-marker-holder-RVA7T-6.jpg"
+    ]
+  },
+  {
+    "id": "heart-shaped-vanity-holder",
+    "name": "Heart Shaped Vanity Holder",
+    "description": "Available in Color of your Choice",
+    "category": "Vanity Essentials",
+    "price": "₹399",
+    "whatsappMessage": "Hi! I'm interested in ordering: Heart Shaped Vanity Holder (₹399)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-83472",
+    "images": [
+      "images/heart-shaped-vanity-holder-P2OBA-1.jpg"
+    ]
+  },
+  {
+    "id": "pen-pencil-holder",
+    "name": "Pen / Pencil Holder",
+    "description": "Dimension: 84mm x 74mm x 90mm\r\n\r\nAvailable in All Colors",
+    "category": "Desk Organizer",
+    "price": "₹299",
+    "whatsappMessage": "Hi! I'm interested in ordering: Pen / Pencil Holder (₹299)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-66888",
+    "images": [
+      "images/pen-pencil-holder-9CL6R-1.jpg",
+      "images/pen-pencil-holder-D0OXZ-2.jpg",
+      "images/pen-pencil-holder-X0DIU-3.jpg",
+      "images/pen-pencil-holder-VXUXN-4.jpg",
+      "images/pen-pencil-holder-4I4S0-5.jpg"
+    ]
+  },
+  {
+    "id": "dinosaur-pencil-holder",
+    "name": "Dinosaur Pencil Holder",
+    "description": "Dimension: 129mm x 166x 161mm.\r\n\r\nAvailable in any color of your choice",
+    "category": "Desk Organizer",
+    "price": "₹400",
+    "whatsappMessage": "Hi! I'm interested in ordering: Dinosaur Pencil Holder (₹400)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-35759",
+    "images": [
+      "images/dinosaur-pencil-holder-TZL4L-1.jpg"
+    ]
+  },
+  {
+    "id": "ganesha-with-mandir-choice-of-color-available",
+    "name": "Ganesha with Mandir  Choice of Color Available",
+    "description": "Available in your favorite color",
+    "category": "",
+    "price": "₹299",
+    "whatsappMessage": "Hi! I'm interested in ordering: Ganesha with Mandir  Choice of Color Available (₹299)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-16396",
+    "images": [
+      "images/ganesha-with-mandir-choice-of-color-available-GMPP0-1.jpg",
+      "images/ganesha-with-mandir-choice-of-color-available-AZEV3-2.jpg",
+      "images/ganesha-with-mandir-choice-of-color-available-F4DNG-3.jpg",
+      "images/ganesha-with-mandir-choice-of-color-available-M5J8O-4.jpg",
+      "images/ganesha-with-mandir-choice-of-color-available-SRJ0D-5.jpg",
+      "images/ganesha-with-mandir-choice-of-color-available-U7GZJ-6.jpg"
+    ]
+  },
+  {
+    "id": "smiley-storage-box",
+    "name": "Smiley Storage Box",
+    "description": "Dimension:  80mm x 40mm 13mm\r\n\r\nAvailable in Multi Colors",
+    "category": "Vanity Essentials",
+    "price": "₹90",
+    "whatsappMessage": "Hi! I'm interested in ordering: Smiley Storage Box (₹90)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-90914",
+    "images": [
+      "images/smiley-storage-box-N00HD-1.jpg",
+      "images/smiley-storage-box-ZHQ4Q-2.jpg",
+      "images/smiley-storage-box-WLG52-3.jpg",
+      "images/smiley-storage-box-NXIKI-4.jpg",
+      "images/smiley-storage-box-O05GX-5.jpg"
+    ]
+  },
+  {
     "id": "bunny-phone-stand",
     "name": "Bunny Phone Stand",
     "description": "🐰✨ Cute, Compact & Uniquely Yours!\r\n\r\nMeet our adorable Bunny Phone Stand – designed to keep your phone secure while adding a touch of charm to your desk. 💕\r\n\r\n🌸 Foldable & Portable\r\n🌸 Perfect for Video Calls & Watching Content\r\n🌸 Lightweight & Easy to Carry\r\n🌸 Personalized with Your Name\r\n🌸 Available in Custom Colors",

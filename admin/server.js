@@ -335,7 +335,7 @@ app.get('/api/products', async (req, res) => {
 });
 
 // Add or update product
-app.post('/api/products', upload.array('images', 5), async (req, res) => {
+app.post('/api/products', upload.any(), async (req, res) => {
   try {
     const { id, name, description, price, category, whatsappMessage, instagramLink, youtubeLink, active } = req.body;
     let products = await readProducts();
@@ -345,7 +345,7 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
     
     if (!productId) {
       // New product
-      productId = generateSlug(name);
+      productId = generateSlug(name || 'product');
       
       // Ensure unique ID
       let counter = 1;
@@ -362,7 +362,7 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
     const newImagePaths = [];
     
     if (req.files && req.files.length > 0) {
-      const cleanTitle = generateSlug(name);
+      const cleanTitle = generateSlug(name || 'product');
       for (let i = 0; i < req.files.length; i++) {
         const file = req.files[i];
         const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
@@ -380,10 +380,10 @@ app.post('/api/products', upload.array('images', 5), async (req, res) => {
     
     const productData = {
       id: productId,
-      name,
-      description,
+      name: name || '',
+      description: description || '',
       category: category || '',
-      price,
+      price: price || '',
       whatsappMessage: whatsappMessage || `Hi! I'm interested in ordering: ${name} (${price})`,
       instagramLink: instagramLink || '',
       youtubeLink: youtubeLink || '',
@@ -464,6 +464,18 @@ app.put('/api/products/:id/toggle', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to toggle status' });
   }
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Server error:', err);
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({ error: `Upload error: ${err.message}` });
+  }
+  if (err) {
+    return res.status(500).json({ error: err.message || 'Internal server error' });
+  }
+  next();
 });
 
 app.listen(PORT, () => {
