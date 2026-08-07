@@ -639,7 +639,15 @@ window.scrollSingleImage = function(productId, direction) {
   const grid = document.getElementById(`grid-${productId}`);
   if (!grid) return;
   const width = grid.clientWidth;
-  grid.scrollBy({ left: direction * width, behavior: 'smooth' });
+  const maxScroll = grid.scrollWidth - width;
+  
+  if (direction > 0 && grid.scrollLeft >= maxScroll - 15) {
+    grid.scrollTo({ left: 0, behavior: 'smooth' });
+  } else if (direction < 0 && grid.scrollLeft <= 15) {
+    grid.scrollTo({ left: maxScroll, behavior: 'smooth' });
+  } else {
+    grid.scrollBy({ left: direction * width, behavior: 'smooth' });
+  }
 };
 
 window.setSingleImage = function(productId, index) {

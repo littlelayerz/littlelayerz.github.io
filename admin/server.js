@@ -120,13 +120,17 @@ async function generateStaticPages(products) {
     let mediaHtml;
     if (hasImages) {
       mediaHtml = `
-        <div class="card-image-container single-view-image">
-          <img src="../../${product.images[0]}" alt="${product.name}" class="card-image" id="img-${product.id}">
+        <div class="single-product-media">
+          <div class="single-product-images-grid" id="grid-${product.id}">
+            ${product.images.map((img, i) => `
+              <img src="../../${img}" alt="${product.name} - view ${i + 1}" class="single-view-img-item" onclick="openModal(event, '${product.id}', ${i})">
+            `).join('')}
+          </div>
           ${hasMultiple ? `
-            <button class="carousel-btn carousel-prev" onclick="changeImage(event,'${product.id}',-1)" aria-label="Previous">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeImage(event,'${product.id}',1)" aria-label="Next">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="scrollSingleImage('${product.id}', -1)" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-next" onclick="scrollSingleImage('${product.id}', 1)" aria-label="Next">❯</button>
             <div class="carousel-dots" id="dots-${product.id}">
-              ${product.images.map((_, i) => `<div class="dot${i === 0 ? ' active' : ''}"></div>`).join('')}
+              ${product.images.map((_, i) => `<div class="dot${i === 0 ? ' active' : ''}" onclick="setSingleImage('${product.id}', ${i})"></div>`).join('')}
             </div>` : ''}
         </div>`;
     } else if (product.instagramLink) {
@@ -136,8 +140,10 @@ async function generateStaticPages(products) {
         </div>`;
     } else {
       mediaHtml = `
-        <div class="card-image-container single-view-image">
-          <img src="https://via.placeholder.com/540x540/f7f7f7/929292?text=No+Image" alt="${product.name}" class="card-image">
+        <div class="single-product-media">
+          <div class="single-product-images-grid">
+            <img src="https://via.placeholder.com/540x540/f7f7f7/929292?text=No+Image" alt="${product.name}" class="single-view-img-item">
+          </div>
         </div>`;
     }
 
