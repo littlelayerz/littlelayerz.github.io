@@ -1,5 +1,20 @@
 [
   {
+    "id": "hogwarts-pen-holder",
+    "name": "Hogwarts - Pen Holder",
+    "description": "Available in different colors",
+    "category": "Desk Organizer",
+    "price": "₹280",
+    "whatsappMessage": "Hi! I'm interested in ordering: Hogwarts - Pen Holder (₹280)",
+    "instagramLink": "",
+    "youtubeLink": "",
+    "active": true,
+    "sku": "LL-70012",
+    "images": [
+      "images/hogwarts-pen-holder-DEXVL-1.jpg"
+    ]
+  },
+  {
     "id": "mandir-with-baal-hanuman",
     "name": "Mandir with Baal Hanuman",
     "description": "You can keep them in car or at home in Mandir",
